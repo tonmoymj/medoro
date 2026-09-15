@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Search, Phone, Siren, Droplet, Wind, Calculator, Stethoscope, MessageCircleQuestion, PhoneCall, ClipboardList, Store, HeartHandshake, Activity, Video, PackageSearch, HandHeart, Megaphone, HelpCircle, Briefcase, Star } from "lucide-react";
 
 type View =
@@ -8,6 +9,8 @@ type View =
   | "caregivers" | "physio" | "telemedicine" | "equipment" | "camps" | "notices" | "faq" | "jobs" | "reviews";
 
 export default function Nav({ view, go }: { view: View; go: (v: View) => void }) {
+  const [lang, setLang] = useState<"bn" | "en">("bn");
+
   const links: { label: string; v: View }[] = [
     { label: "ডাক্তার", v: "doctors" },
     { label: "হাসপাতাল", v: "hospitals" },
@@ -54,8 +57,8 @@ export default function Nav({ view, go }: { view: View; go: (v: View) => void })
           </span>
         </div>
       </div>
-      <div className="mx-auto max-w-6xl px-5 py-4 flex items-center justify-between gap-6">
-        <button onClick={() => go("home")} className="flex items-baseline gap-2 group">
+      <div className="mx-auto max-w-6xl px-5 py-4 flex items-center justify-between gap-4">
+        <button onClick={() => go("home")} className="flex items-baseline gap-2 group shrink-0">
           <span className="font-display italic font-semibold text-[28px] leading-none text-pine tracking-tight">
             Medoro
           </span>
@@ -64,7 +67,7 @@ export default function Nav({ view, go }: { view: View; go: (v: View) => void })
           </span>
         </button>
 
-        <nav className="hidden md:flex items-center gap-8 font-body text-[15px] font-medium">
+        <nav className="hidden lg:flex items-center gap-8 font-body text-[15px] font-medium">
           {links.map((l) => (
             <button
               key={l.v}
@@ -78,13 +81,40 @@ export default function Nav({ view, go }: { view: View; go: (v: View) => void })
           ))}
         </nav>
 
-        <button
-          onClick={() => go("doctors")}
-          className="flex items-center gap-2 bg-pine text-paper px-4 py-2 text-sm font-medium hover:bg-pine-dark transition-colors"
-        >
-          <Search className="h-4 w-4" strokeWidth={2.5} />
-          <span className="hidden sm:inline">ডাক্তার খুঁজুন</span>
-        </button>
+        <div className="flex items-center gap-3">
+          {/* Language Toggle Capsule Switcher */}
+          <div className="inline-flex items-center rounded-full p-0.5 border border-line bg-paper/60 shadow-inner font-mono text-xs overflow-hidden">
+            <button
+              onClick={() => setLang("bn")}
+              className={`px-3 py-1 rounded-full transition-all duration-200 font-semibold ${
+                lang === "bn"
+                  ? "bg-pine text-paper shadow-sm"
+                  : "text-ink/60 hover:text-ink"
+              }`}
+            >
+              বাং
+            </button>
+            <button
+              onClick={() => setLang("en")}
+              className={`px-3 py-1 rounded-full transition-all duration-200 font-semibold ${
+                lang === "en"
+                  ? "bg-pine text-paper shadow-sm"
+                  : "text-ink/60 hover:text-ink"
+              }`}
+            >
+              EN
+            </button>
+          </div>
+
+          {/* Doctor Search CTA */}
+          <button
+            onClick={() => go("doctors")}
+            className="flex items-center gap-2 bg-pine text-paper px-4 py-2 text-sm font-medium hover:bg-pine-dark transition-colors shadow-sm"
+          >
+            <Search className="h-4 w-4" strokeWidth={2.5} />
+            <span className="hidden sm:inline">ডাক্তার খুঁজুন</span>
+          </button>
+        </div>
       </div>
 
       {/* utility strip: emergency + tools + community + more */}
