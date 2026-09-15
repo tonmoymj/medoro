@@ -171,15 +171,15 @@ export default function Doctors({ openDoctor }: { openDoctor: (id: string) => vo
 
                       {/* Avatar & Name - Vertical Centered / Large Layout */}
                       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-4 text-center sm:text-left">
-                        <div className="relative h-20 w-20 shrink-0 border-2 border-pine/20 rounded-full overflow-hidden bg-pine/5 flex items-center justify-center font-display text-3xl text-pine shadow-inner group-hover:border-pine transition-colors">
+                        <div className="relative h-28 w-28 sm:h-32 sm:w-32 shrink-0 border-2 border-pine/30 rounded-full overflow-hidden bg-pine/10 flex items-center justify-center font-display text-4xl text-pine shadow-md group-hover:border-pine group-hover:scale-105 transition-all duration-300">
                           {d.photo ? (
-                            <img src={d.photo} alt={d.name} className="h-full w-full object-cover" />
+                            <img src={d.photo} alt={d.name} className="h-full w-full object-cover object-top" />
                           ) : (
-                            <span>{initials}</span>
+                            <span className="font-semibold text-pine tracking-wider">{initials}</span>
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-display text-lg sm:text-xl text-ink group-hover:text-pine transition-colors leading-snug font-semibold">
+                          <h3 className="font-display text-xl sm:text-2xl text-ink group-hover:text-pine transition-colors leading-snug font-semibold">
                             {d.name}
                           </h3>
                           <p className="text-xs text-ink/65 mt-1 leading-normal font-mono">

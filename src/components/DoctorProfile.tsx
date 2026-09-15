@@ -41,15 +41,15 @@ export default function DoctorProfile({
           <div className="flex flex-col md:flex-row md:items-start gap-8">
             {/* avatar */}
             <div className="relative mx-auto md:mx-0 shrink-0">
-              <div className="h-44 w-44 sm:h-48 sm:w-48 border-4 border-white shadow-xl rounded-full overflow-hidden bg-pine/10 flex items-center justify-center font-display text-6xl text-pine ring-2 ring-pine/20">
+              <div className="h-56 w-56 sm:h-64 sm:w-64 border-4 border-line/40 shadow-2xl rounded-full overflow-hidden bg-pine/10 flex items-center justify-center font-display text-7xl text-pine ring-4 ring-pine/20">
                 {doctor.photo ? (
-                  <img src={doctor.photo} alt={doctor.name} className="h-full w-full object-cover object-top" />
+                  <img src={doctor.photo} alt={doctor.name} className="h-full w-full object-cover object-top hover:scale-105 transition-transform duration-500" />
                 ) : (
-                  <span>{initials}</span>
+                  <span className="font-semibold">{initials}</span>
                 )}
               </div>
-              <span className="absolute bottom-2 right-2 bg-pine text-paper p-2 rounded-full border-2 border-white shadow-md">
-                <CheckCircle className="h-5 w-5" />
+              <span className="absolute bottom-3 right-3 bg-pine text-paper p-2.5 rounded-full border-2 border-line shadow-lg">
+                <CheckCircle className="h-6 w-6 text-gold" />
               </span>
             </div>
 
