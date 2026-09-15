@@ -17,7 +17,7 @@ export default function Medicines() {
       <h1 className="font-display text-4xl text-ink mb-3">জেনেরিক ওষুধের তালিকা</h1>
       <p className="text-ink/60 max-w-xl mb-8">জেনেরিক নাম, শ্রেণি ও ব্যবহার দেখুন — প্রতিটির সাথে কতগুলো ব্র্যান্ড পাওয়া যায় তাও উল্লেখ আছে।</p>
 
-      <div className="bg-white border border-line flex items-center gap-3 px-4 py-3.5 mb-8 max-w-lg">
+      <div className="bg-cardbg border border-line flex items-center gap-3 px-4 py-3.5 mb-8 max-w-lg">
         <Search className="h-5 w-5 text-ink/40 shrink-0" strokeWidth={2} />
         <input
           value={query}

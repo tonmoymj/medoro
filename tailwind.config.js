@@ -8,21 +8,21 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        paper: "var(--paper)",
-        ink: "var(--ink)",
+        paper: "rgb(var(--paper) / <alpha-value>)",
+        ink: "rgb(var(--ink) / <alpha-value>)",
         pine: {
-          DEFAULT: "var(--pine-default)",
-          light: "var(--pine-light)",
-          dark: "var(--pine-dark)",
+          DEFAULT: "rgb(var(--pine-default) / <alpha-value>)",
+          light: "rgb(var(--pine-light) / <alpha-value>)",
+          dark: "rgb(var(--pine-dark) / <alpha-value>)",
         },
         gold: {
           DEFAULT: "#C68A2E",
           light: "#DDA748",
         },
         brick: "#A63D2F",
-        line: "var(--line)",
-        cardbg: "var(--card-bg)",
-        cardhover: "var(--card-hover)",
+        line: "rgb(var(--line) / <alpha-value>)",
+        cardbg: "rgb(var(--card-bg) / <alpha-value>)",
+        cardhover: "rgb(var(--card-hover) / <alpha-value>)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

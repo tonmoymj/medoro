@@ -16,7 +16,7 @@ export default function AdminPreview() {
         এটি অ্যাডমিন প্যানেলের একটা নমুনা ডিজাইন — যেখান থেকে ডেটা এন্ট্রি টিম ডাক্তার-হাসপাতালের তথ্য পরিচালনা করবে।
       </p>
 
-      <div className="border border-line bg-white">
+      <div className="border border-line bg-cardbg">
         {/* admin topbar */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-line bg-pine text-paper">
           <span className="flex items-center gap-2 font-display italic text-lg">

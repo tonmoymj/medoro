@@ -12,7 +12,7 @@ export default function Camps() {
 
       <div className="space-y-4">
         {camps.map((c) => (
-          <div key={c.id} className="bg-white border border-line perf-top pt-5">
+          <div key={c.id} className="bg-cardbg border border-line perf-top pt-5">
             <div className="px-6 pb-5">
               <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold mb-1.5">{c.org}</p>
               <h3 className="font-display text-xl text-ink">{c.title}</h3>

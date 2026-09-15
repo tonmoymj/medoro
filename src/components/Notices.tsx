@@ -14,7 +14,7 @@ export default function Notices() {
           <div
             key={n.id}
             className={`border p-5 flex items-start gap-4 ${
-              n.severity === "alert" ? "border-brick bg-brick/5" : "border-line bg-white"
+              n.severity === "alert" ? "border-brick bg-brick/5" : "border-line bg-cardbg"
             }`}
           >
             {n.severity === "alert" ? (

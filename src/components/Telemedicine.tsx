@@ -19,7 +19,7 @@ export default function Telemedicine() {
           if (!d) return null;
           const isBooked = booked === t.id;
           return (
-            <div key={t.id} className="bg-white border border-line p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div key={t.id} className="bg-cardbg border border-line p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold mb-1">{d.specialty}</p>
                 <h3 className="font-display text-xl text-ink">{d.name}</h3>

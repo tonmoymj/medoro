@@ -27,13 +27,13 @@ export default function DoctorProfile({
     <div className="mx-auto max-w-4xl px-5 py-10">
       <button 
         onClick={back} 
-        className="inline-flex items-center gap-2 text-xs font-mono bg-white border border-line px-3.5 py-2 text-ink/70 hover:text-pine hover:border-pine mb-8 transition-all shadow-sm"
+        className="inline-flex items-center gap-2 text-xs font-mono bg-cardbg border border-line px-3.5 py-2 text-ink/70 hover:text-pine hover:border-pine mb-8 transition-all shadow-sm"
       >
         <ArrowLeft className="h-4 w-4" strokeWidth={2} /> ডাক্তার তালিকায় ফিরুন
       </button>
 
       {/* ── main profile banner card ── */}
-      <div className="bg-white border border-line shadow-md overflow-hidden">
+      <div className="bg-cardbg border border-line shadow-md overflow-hidden">
         {/* top hero accent */}
         <div className="h-2 w-full bg-gradient-to-r from-pine via-gold to-pine" />
 
@@ -111,7 +111,7 @@ export default function DoctorProfile({
 
         <div className="grid md:grid-cols-2 gap-5">
           {doctor.chambers.map((c, i) => (
-            <div key={i} className="bg-white border border-line shadow-sm hover:border-pine/40 transition-all overflow-hidden flex flex-col justify-between">
+            <div key={i} className="bg-cardbg border border-line shadow-sm hover:border-pine/40 transition-all overflow-hidden flex flex-col justify-between">
               <div className="p-6">
                 <div className="flex items-start justify-between gap-3 mb-2">
                   <button
@@ -182,7 +182,7 @@ export default function DoctorProfile({
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
             {doctorReviews.map((r) => (
-              <div key={r.id} className="bg-white border border-line p-5 shadow-sm">
+              <div key={r.id} className="bg-cardbg border border-line p-5 shadow-sm">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex gap-0.5">
                     {Array.from({ length: 5 }).map((_, i) => (
@@ -203,7 +203,7 @@ export default function DoctorProfile({
       )}
 
       {/* ── call-back form ── */}
-      <div id="serial-form" className="mt-10 bg-white border border-line shadow-md overflow-hidden">
+      <div id="serial-form" className="mt-10 bg-cardbg border border-line shadow-md overflow-hidden">
         <div className="h-1.5 w-full bg-gradient-to-r from-gold via-pine to-gold" />
         <div className="p-6 sm:p-10">
           <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-gold mb-1">সিরিয়াল ও সিরিয়ালের সহায়তা</p>

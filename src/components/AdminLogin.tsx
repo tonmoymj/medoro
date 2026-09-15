@@ -34,7 +34,7 @@ export default function AdminLogin() {
           </div>
         </div>
 
-        <div className="bg-white border border-line overflow-hidden">
+        <div className="bg-cardbg border border-line overflow-hidden">
           <div className="h-1 bg-gradient-to-r from-pine to-gold" />
           <div className="p-7">
             <h1 className="font-display text-2xl text-ink mb-1">লগইন করুন</h1>

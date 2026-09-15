@@ -12,7 +12,7 @@ export default function Hotlines() {
           <a
             key={h.id}
             href={`tel:${h.number}`}
-            className="flex items-center justify-between bg-white border border-line p-5 hover:border-brick transition-colors"
+            className="flex items-center justify-between bg-cardbg border border-line p-5 hover:border-brick transition-colors"
           >
             <span className="text-ink font-medium">{h.name}</span>
             <span className="flex items-center gap-2 font-mono text-lg text-brick">

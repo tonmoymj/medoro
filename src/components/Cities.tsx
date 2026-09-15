@@ -18,8 +18,8 @@ export default function Cities({ go }: { go: (v: "doctors") => void }) {
             onClick={() => c.status === "live" && go("doctors")}
             className={`text-left border p-5 flex items-center justify-between gap-4 transition-all ${
               c.status === "live"
-                ? "border-pine bg-white hover:shadow-[4px_4px_0_0_#C68A2E] cursor-pointer"
-                : "border-line bg-white/50 opacity-60 cursor-default"
+                ? "border-pine bg-cardbg hover:shadow-gold cursor-pointer"
+                : "border-line bg-cardbg/50 opacity-60 cursor-default"
             }`}
           >
             <div>

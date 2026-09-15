@@ -4,37 +4,46 @@
 
 @layer base {
   :root {
-    --paper: #F5F3EC;
-    --ink: #16231C;
-    --pine-default: #123832;
-    --pine-light: #1E4D45;
-    --pine-dark: #0B2622;
-    --line: #D9D3C3;
-    --card-bg: #FFFFFF;
-    --card-hover: #FAF8F2;
+    --paper: 245 243 236;
+    --ink: 22 35 28;
+    --pine-default: 18 56 50;
+    --pine-light: 30 77 69;
+    --pine-dark: 11 38 34;
+    --line: 217 211 195;
+    --card-bg: 255 255 255;
+    --card-hover: 250 248 242;
+    --shadow-color: 18 56 50;
+    --shadow-accent: 198 138 46;
   }
 
   .dark {
-    --paper: #121816;
-    --ink: #EAE6DF;
-    --pine-default: #1B453E;
-    --pine-light: #255C53;
-    --pine-dark: #0F2D28;
-    --line: #2B3A34;
-    --card-bg: #1A2320;
-    --card-hover: #222D29;
+    --paper: 18 24 22;
+    --ink: 234 230 223;
+    --pine-default: 27 69 62;
+    --pine-light: 37 92 83;
+    --pine-dark: 15 45 40;
+    --line: 43 58 52;
+    --card-bg: 26 35 32;
+    --card-hover: 34 45 41;
+    --shadow-color: 0 0 0;
+    --shadow-accent: 198 138 46;
   }
 }
 
 @layer base {
   * {
-    border-color: var(--line);
+    border-color: rgb(var(--line));
   }
   body {
-    background-color: var(--paper);
-    color: var(--ink);
+    background-color: rgb(var(--paper));
+    color: rgb(var(--ink));
     font-family: 'Work Sans', 'Noto Sans Bengali', sans-serif;
-    transition: background-color 0.25s ease, color 0.25s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Smooth dark mode transition for all elements */
+  *, *::before, *::after {
+    transition: background-color 0.3s ease, color 0.15s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   }
 }
 
@@ -49,16 +58,24 @@
     left: 0;
     right: 0;
     height: 1px;
-    background-image: radial-gradient(circle, var(--paper) 1.5px, transparent 1.6px);
+    background-image: radial-gradient(circle, rgb(var(--paper)) 1.5px, transparent 1.6px);
     background-size: 10px 1px;
     background-repeat: repeat-x;
     background-position: 0 center;
   }
   .rule {
-    border-top: 1px solid var(--line);
+    border-top: 1px solid rgb(var(--line));
   }
   .num {
     font-variant-numeric: tabular-nums;
+  }
+
+  /* Dark mode shadow helpers */
+  .shadow-pine {
+    box-shadow: 4px 4px 0 0 rgb(var(--shadow-color));
+  }
+  .shadow-gold {
+    box-shadow: 4px 4px 0 0 rgb(var(--shadow-accent));
   }
 }
 
@@ -77,7 +94,19 @@
   animation-play-state: paused;
 }
 
+/* Input / form fields — dark mode friendly */
+input, textarea, select {
+  background-color: rgb(var(--card-bg));
+  color: rgb(var(--ink));
+}
+input::placeholder, textarea::placeholder {
+  color: rgb(var(--ink) / 0.4);
+}
+input:focus, textarea:focus, select:focus {
+  border-color: rgb(var(--pine-default));
+}
+
 ::selection {
   background: #C68A2E;
-  color: #F5F3EC;
+  color: rgb(var(--paper));
 }

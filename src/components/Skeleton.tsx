@@ -8,7 +8,7 @@ export function SkeletonLine({ className = "" }: { className?: string }) {
 
 export function DoctorCardSkeleton() {
   return (
-    <div className="bg-white border border-line animate-pulse overflow-hidden flex flex-col">
+    <div className="bg-cardbg border border-line animate-pulse overflow-hidden flex flex-col">
       <div className="h-1 w-full bg-line" />
       <div className="p-5 flex flex-col flex-1">
         {/* avatar + name */}

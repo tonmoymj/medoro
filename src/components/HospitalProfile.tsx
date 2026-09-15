@@ -20,7 +20,7 @@ export default function HospitalProfile({
         <ArrowLeft className="h-4 w-4" strokeWidth={2} /> হাসপাতাল তালিকায় ফিরুন
       </button>
 
-      <div className="bg-white border border-line overflow-hidden">
+      <div className="bg-cardbg border border-line overflow-hidden">
         {hospital.photo && (
           <div className="h-56 sm:h-72 w-full bg-pine/5 border-b border-line overflow-hidden">
             <img src={hospital.photo} alt={hospital.name} className="h-full w-full object-cover" />

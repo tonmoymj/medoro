@@ -12,7 +12,7 @@ export default function Equipment() {
 
       <div className="grid sm:grid-cols-2 gap-4">
         {equipment.map((e) => (
-          <div key={e.id} className="bg-white border border-line p-5 flex items-center justify-between gap-4">
+          <div key={e.id} className="bg-cardbg border border-line p-5 flex items-center justify-between gap-4">
             <div>
               <h3 className="font-display text-lg text-ink">{e.name}</h3>
               <p className="text-xs text-ink/50 mt-1">{e.provider}</p>

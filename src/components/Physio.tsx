@@ -12,7 +12,7 @@ export default function Physio() {
 
       <div className="grid sm:grid-cols-2 gap-6">
         {physioCenters.map((p) => (
-          <div key={p.id} className="bg-white border border-line p-6">
+          <div key={p.id} className="bg-cardbg border border-line p-6">
             <h3 className="font-display text-xl text-ink">{p.name}</h3>
             <p className="text-sm text-ink/55 mt-2 flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" strokeWidth={2} /> {p.area}</p>
             <div className="mt-4 flex flex-wrap gap-2">

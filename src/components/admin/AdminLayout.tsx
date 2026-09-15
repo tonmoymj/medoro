@@ -35,7 +35,7 @@ export default function AdminLayout() {
       <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-gold mb-2">অ্যাডমিন প্যানেল</p>
       <h1 className="font-display text-4xl text-ink mb-8">ড্যাশবোর্ড & কন্ট্রোল সেন্টার</h1>
 
-      <div className="border border-line bg-white overflow-hidden">
+      <div className="border border-line bg-cardbg overflow-hidden">
         {/* ── topbar ── */}
         <div className="flex items-center justify-between px-5 py-3.5 bg-pine text-paper border-b border-pine/30">
           <div className="flex items-center gap-2.5">

@@ -32,7 +32,7 @@ export default function SymptomChecker({ go }: { go: (v: "doctors") => void }) {
             key={s}
             onClick={() => setSelected(s)}
             className={`text-left border p-4 transition-colors ${
-              selected === s ? "border-pine bg-pine/5 text-pine font-medium" : "border-line bg-white text-ink/75 hover:border-pine/40"
+              selected === s ? "border-pine bg-pine/5 text-pine font-medium" : "border-line bg-cardbg text-ink/75 hover:border-pine/40"
             }`}
           >
             {s}
@@ -41,7 +41,7 @@ export default function SymptomChecker({ go }: { go: (v: "doctors") => void }) {
       </div>
 
       {result && specialty && (
-        <div className="mt-8 bg-white border border-line perf-top pt-5">
+        <div className="mt-8 bg-cardbg border border-line perf-top pt-5">
           <div className="px-6 pb-6">
             <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-gold mb-2">প্রাথমিক পরামর্শ</p>
             <p className="text-ink flex items-start gap-2 text-sm">

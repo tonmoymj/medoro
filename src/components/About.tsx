@@ -25,7 +25,7 @@ export default function About() {
         {aboutInfo.points.map((p, idx) => {
           const IconComp = iconMap[p.iconName] || ShieldCheck;
           return (
-            <div key={idx} className="bg-white border border-line p-6">
+            <div key={idx} className="bg-cardbg border border-line p-6">
               <IconComp className="h-6 w-6 text-gold" strokeWidth={1.75} />
               <h3 className="font-display text-xl text-ink mt-4">{p.title}</h3>
               <p className="text-sm text-ink/60 mt-2 leading-relaxed">{p.body}</p>

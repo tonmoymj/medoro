@@ -34,7 +34,7 @@ export default function Home({
           </p>
 
           {/* search slip */}
-          <div className="mt-9 bg-white border border-line shadow-[4px_4px_0_0_#123832] max-w-lg">
+          <div className="mt-9 bg-cardbg border border-line shadow-pine max-w-lg">
             <div className="flex items-center gap-3 px-4 py-3.5 border-b border-line">
               <Search className="h-5 w-5 text-ink/40 shrink-0" strokeWidth={2} />
               <input
@@ -73,7 +73,7 @@ export default function Home({
         </div>
 
         {/* specialty index - literal numbered directory */}
-        <div className="border border-line bg-white">
+        <div className="border border-line bg-cardbg">
           <div className="px-5 py-3 border-b border-line flex items-center justify-between">
             <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/50">{t("বিভাগ অনুযায়ী সূচি")}</p>
             <Stethoscope className="h-4 w-4 text-ink/30" strokeWidth={2} />
@@ -116,7 +116,7 @@ export default function Home({
             <button
               key={d.id}
               onClick={() => openDoctor(d.id)}
-              className="text-left bg-white border border-line perf-top pt-5 hover:shadow-[4px_4px_0_0_#C68A2E] hover:-translate-y-0.5 transition-all"
+              className="text-left bg-cardbg border border-line perf-top pt-5 hover:shadow-gold hover:-translate-y-0.5 transition-all"
             >
               <div className="px-5 pb-5">
                 <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold mb-2">{d.specialty}</p>

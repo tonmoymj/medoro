@@ -33,7 +33,7 @@ export default function AboutManager() {
   };
 
   return (
-    <div className="bg-white border border-line p-6 max-w-3xl">
+    <div className="bg-cardbg border border-line p-6 max-w-3xl">
       <div className="flex items-center justify-between border-b border-line pb-4 mb-6">
         <div>
           <h2 className="font-display text-2xl text-ink">আমাদের সম্পর্কে (About Us) কনফিগারেশন</h2>
@@ -91,7 +91,7 @@ export default function AboutManager() {
                     <input
                       value={pt.title}
                       onChange={(e) => handlePointChange(i, "title", e.target.value)}
-                      className="w-full border border-line px-3 py-1.5 text-sm bg-white outline-none focus:border-pine"
+                      className="w-full border border-line px-3 py-1.5 text-sm bg-cardbg outline-none focus:border-pine"
                     />
                   </div>
                   <div>
@@ -100,7 +100,7 @@ export default function AboutManager() {
                       rows={2}
                       value={pt.body}
                       onChange={(e) => handlePointChange(i, "body", e.target.value)}
-                      className="w-full border border-line px-3 py-1.5 text-sm bg-white outline-none focus:border-pine resize-none"
+                      className="w-full border border-line px-3 py-1.5 text-sm bg-cardbg outline-none focus:border-pine resize-none"
                     />
                   </div>
                 </div>

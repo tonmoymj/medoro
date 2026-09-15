@@ -55,7 +55,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <div className="bg-white border border-line p-6 sm:p-8">
+        <div className="bg-cardbg border border-line p-6 sm:p-8">
           {sent ? (
             <p className="text-pine bg-pine/5 border border-pine/20 px-4 py-3 text-sm flex items-center gap-2">
               <CheckCircle2 className="h-4 w-4 shrink-0" strokeWidth={2} /> বার্তা পাঠানো হয়েছে। ধন্যবাদ, আমরা শীঘ্রই যোগাযোগ করব।

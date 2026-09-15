@@ -17,7 +17,7 @@ export default function JoinUs() {
         <button
           onClick={() => setType("doctor")}
           className={`flex-1 flex items-center gap-3 border p-4 text-left transition-colors ${
-            type === "doctor" ? "border-pine bg-pine/5" : "border-line bg-white"
+            type === "doctor" ? "border-pine bg-pine/5" : "border-line bg-cardbg"
           }`}
         >
           <Stethoscope className={`h-5 w-5 ${type === "doctor" ? "text-pine" : "text-ink/40"}`} strokeWidth={1.75} />
@@ -29,7 +29,7 @@ export default function JoinUs() {
         <button
           onClick={() => setType("hospital")}
           className={`flex-1 flex items-center gap-3 border p-4 text-left transition-colors ${
-            type === "hospital" ? "border-pine bg-pine/5" : "border-line bg-white"
+            type === "hospital" ? "border-pine bg-pine/5" : "border-line bg-cardbg"
           }`}
         >
           <Building2 className={`h-5 w-5 ${type === "hospital" ? "text-pine" : "text-ink/40"}`} strokeWidth={1.75} />
@@ -40,7 +40,7 @@ export default function JoinUs() {
         </button>
       </div>
 
-      <div className="bg-white border border-line p-6 sm:p-8">
+      <div className="bg-cardbg border border-line p-6 sm:p-8">
         {sent ? (
           <div className="text-center py-8">
             <CheckCircle2 className="h-10 w-10 text-pine mx-auto mb-3" strokeWidth={1.5} />

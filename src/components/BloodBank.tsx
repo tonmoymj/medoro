@@ -12,7 +12,7 @@ export default function BloodBank() {
 
       <div className="flex flex-wrap gap-2 mb-10">
         {groups.map((g) => (
-          <button key={g} className="border border-line bg-white px-4 py-2 text-sm font-mono hover:border-brick hover:text-brick transition-colors flex items-center gap-1.5">
+          <button key={g} className="border border-line bg-cardbg px-4 py-2 text-sm font-mono hover:border-brick hover:text-brick transition-colors flex items-center gap-1.5">
             <Droplet className="h-3.5 w-3.5" strokeWidth={2} /> {g}
           </button>
         ))}

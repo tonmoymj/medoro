@@ -80,7 +80,7 @@ export default function AdManager() {
       {/* Ad Slots List Grid */}
       <div className="grid md:grid-cols-2 gap-5">
         {ads.map((ad) => (
-          <div key={ad.id} className="bg-white border border-line p-5 flex flex-col justify-between shadow-sm relative overflow-hidden">
+          <div key={ad.id} className="bg-cardbg border border-line p-5 flex flex-col justify-between shadow-sm relative overflow-hidden">
             <div className={`h-1.5 w-full absolute top-0 left-0 ${ad.isOccupied ? "bg-red-500" : "bg-emerald-500"}`} />
 
             <div>
@@ -135,7 +135,7 @@ export default function AdManager() {
       {/* Edit Modal */}
       {editingAd && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
-          <div className="bg-white border border-line w-full max-w-lg p-6 overflow-y-auto max-h-[90vh]">
+          <div className="bg-cardbg border border-line w-full max-w-lg p-6 overflow-y-auto max-h-[90vh]">
             <div className="flex items-center justify-between border-b border-line pb-3 mb-4">
               <h3 className="font-display text-xl text-ink">এড স্পট কনফিগারেশন</h3>
               <button onClick={() => setEditingAd(null)} className="text-ink/50 hover:text-ink">✕</button>

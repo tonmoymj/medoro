@@ -26,7 +26,7 @@ export default function BmiCalculator() {
       </h1>
       <p className="text-ink/60 mb-8">উচ্চতা ও ওজন দিয়ে আপনার বডি মাস ইনডেক্স জেনে নিন।</p>
 
-      <div className="bg-white border border-line p-6 sm:p-8">
+      <div className="bg-cardbg border border-line p-6 sm:p-8">
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
             <label className="font-mono text-xs text-ink/50 uppercase tracking-wide">উচ্চতা (সেন্টিমিটার)</label>

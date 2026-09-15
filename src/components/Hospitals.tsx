@@ -6,7 +6,7 @@ import { SkeletonLine } from "@/components/Skeleton";
 
 function HospitalCardSkeleton() {
   return (
-    <div className="bg-white border border-line p-6 animate-pulse">
+    <div className="bg-cardbg border border-line p-6 animate-pulse">
       <SkeletonLine className="h-3 w-24 mb-3" />
       <SkeletonLine className="h-6 w-52 mb-3" />
       <SkeletonLine className="h-4 w-64 mb-2" />
@@ -50,7 +50,7 @@ export default function Hospitals({ openHospital }: { openHospital: (id: string)
             <button
               key={h.id}
               onClick={() => openHospital(h.id)}
-              className="text-left bg-white border border-line hover:shadow-[4px_4px_0_0_#123832] transition-all overflow-hidden flex flex-col justify-between group"
+              className="text-left bg-cardbg border border-line hover:shadow-pine transition-all overflow-hidden flex flex-col justify-between group"
             >
               {h.photo && (
                 <div className="h-40 w-full bg-pine/5 overflow-hidden border-b border-line">

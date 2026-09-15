@@ -96,7 +96,7 @@ export default function HospitalManager() {
 
       {confirmId && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 px-4">
-          <div className="bg-white border border-line w-full max-w-sm p-6">
+          <div className="bg-cardbg border border-line w-full max-w-sm p-6">
             <div className="flex items-start gap-3 mb-5">
               <AlertTriangle className="h-5 w-5 text-red-500 shrink-0 mt-0.5" strokeWidth={2} />
               <div>

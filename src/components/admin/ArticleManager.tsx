@@ -58,7 +58,7 @@ export default function ArticleManager() {
 
       <div className="space-y-4">
         {articles.map((a) => (
-          <div key={a.id} className="bg-white border border-line p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div key={a.id} className="bg-cardbg border border-line p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <span className="font-mono text-[10px] uppercase text-gold bg-gold/10 px-2 py-0.5 border border-gold/20">{a.category}</span>
               <h3 className="font-display text-lg text-ink mt-1">{a.title}</h3>
@@ -80,7 +80,7 @@ export default function ArticleManager() {
 
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
-          <div className="bg-white border border-line w-full max-w-lg p-6">
+          <div className="bg-cardbg border border-line w-full max-w-lg p-6">
             <h3 className="font-display text-xl text-ink mb-4">{editing ? "আর্টিকেল এডিট" : "নতুন আর্টিকেল পোস্ট"}</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>

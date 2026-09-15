@@ -121,7 +121,7 @@ export default function HospitalForm({ initial, onClose }: Props) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center bg-ink/40 overflow-y-auto py-10 px-4">
-      <div className="w-full max-w-xl bg-white border border-line">
+      <div className="w-full max-w-xl bg-cardbg border border-line">
         <div className="flex items-center justify-between px-6 py-4 border-b border-line bg-pine text-paper">
           <h2 className="font-display text-xl">{isEdit ? "হাসপাতাল সম্পাদনা" : "নতুন হাসপাতাল যোগ"}</h2>
           <button onClick={onClose}><X className="h-5 w-5" strokeWidth={2} /></button>
@@ -258,5 +258,5 @@ function Field({ label, error, children }: { label: string; error?: string; chil
   );
 }
 function inp(err?: string) {
-  return `w-full border ${err ? "border-red-400" : "border-line"} px-3 py-2.5 text-sm outline-none focus:border-pine bg-white`;
+  return `w-full border ${err ? "border-red-400" : "border-line"} px-3 py-2.5 text-sm outline-none focus:border-pine bg-cardbg`;
 }

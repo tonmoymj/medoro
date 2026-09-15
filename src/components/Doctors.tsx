@@ -37,12 +37,12 @@ export default function Doctors({ openDoctor }: { openDoctor: (id: string) => vo
           </p>
           <h1 className="font-display text-4xl text-ink">বিশেষজ্ঞ ডাক্তার খুঁজুন</h1>
         </div>
-        <div className="font-mono text-xs text-ink/50 bg-white border border-line px-3.5 py-2 w-fit">
+        <div className="font-mono text-xs text-ink/50 bg-cardbg border border-line px-3.5 py-2 w-fit">
           মোট নিবন্ধিত ডাক্তার: <span className="text-pine font-bold num">{doctors.length}</span> জন
         </div>
       </div>
 
-      <div className="bg-white border border-line p-2 mb-10 shadow-sm flex flex-col md:flex-row items-center gap-3">
+      <div className="bg-cardbg border border-line p-2 mb-10 shadow-sm flex flex-col md:flex-row items-center gap-3">
         <div className="flex items-center gap-3 px-3 py-2 flex-1 w-full">
           <Search className="h-5 w-5 text-pine shrink-0" strokeWidth={2} />
           <input
@@ -65,7 +65,7 @@ export default function Doctors({ openDoctor }: { openDoctor: (id: string) => vo
       <div className="grid md:grid-cols-[240px_1fr] gap-10">
         {/* filter sidebar */}
         <aside>
-          <div className="bg-white border border-line p-4">
+          <div className="bg-cardbg border border-line p-4">
             <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink/50 mb-3 flex items-center gap-2">
               <SlidersHorizontal className="h-3.5 w-3.5" strokeWidth={2} /> বিভাগ ফিল্টার
             </p>
@@ -130,7 +130,7 @@ export default function Doctors({ openDoctor }: { openDoctor: (id: string) => vo
               <DoctorCardSkeleton />
             </div>
           ) : filtered.length === 0 ? (
-            <div className="flex flex-col items-center gap-3 py-16 text-center border border-dashed border-line bg-white">
+            <div className="flex flex-col items-center gap-3 py-16 text-center border border-dashed border-line bg-cardbg">
               <SearchX className="h-10 w-10 text-ink/25" strokeWidth={1.5} />
               <p className="text-ink/70 font-medium text-base">কোনো ডাক্তার পাওয়া যায়নি</p>
               <p className="text-ink/45 text-xs max-w-xs">
@@ -151,7 +151,7 @@ export default function Doctors({ openDoctor }: { openDoctor: (id: string) => vo
                   <div
                     key={d.id}
                     onClick={() => openDoctor(d.id)}
-                    className="group relative bg-white border border-line hover:border-pine/50 hover:shadow-xl transition-all duration-300 flex flex-col cursor-pointer overflow-hidden"
+                    className="group relative bg-cardbg border border-line hover:border-pine/50 hover:shadow-xl transition-all duration-300 flex flex-col cursor-pointer overflow-hidden"
                   >
                     {/* Top gradient accent */}
                     <div className="h-1.5 w-full bg-gradient-to-r from-pine via-gold to-pine" />

@@ -47,7 +47,7 @@ export default function MedicineManager() {
   return (
     <div>
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
-        <div className="flex items-center gap-2 border border-line px-3 py-2 flex-1 bg-white">
+        <div className="flex items-center gap-2 border border-line px-3 py-2 flex-1 bg-cardbg">
           <Search className="h-4 w-4 text-ink/40 shrink-0" />
           <input
             value={query}
@@ -64,7 +64,7 @@ export default function MedicineManager() {
         </button>
       </div>
 
-      <div className="border border-line bg-white overflow-hidden">
+      <div className="border border-line bg-cardbg overflow-hidden">
         <div className="hidden sm:grid grid-cols-[1fr_150px_100px_120px] gap-2 px-4 py-2.5 bg-paper border-b border-line font-mono text-[10px] uppercase text-ink/45">
           <span>জেনেরিক নাম</span>
           <span>শ্রেণি</span>
@@ -106,7 +106,7 @@ export default function MedicineManager() {
 
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
-          <div className="bg-white border border-line w-full max-w-md p-6">
+          <div className="bg-cardbg border border-line w-full max-w-md p-6">
             <h3 className="font-display text-xl text-ink mb-4">{editing ? "ওষুধ এডিট" : "নতুন ওষুধ যোগ"}</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>

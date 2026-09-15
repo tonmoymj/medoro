@@ -13,7 +13,7 @@ export default function Community() {
 
       <form
         onSubmit={(e) => { e.preventDefault(); setSent(true); }}
-        className="bg-white border border-line p-5 mb-10 flex gap-3"
+        className="bg-cardbg border border-line p-5 mb-10 flex gap-3"
       >
         {sent ? (
           <p className="text-pine text-sm">প্রশ্ন জমা হয়েছে, ধন্যবাদ!</p>

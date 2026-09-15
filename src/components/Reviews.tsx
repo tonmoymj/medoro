@@ -13,7 +13,7 @@ export default function Reviews() {
         {reviews.map((r) => {
           const d = doctors.find((x) => x.id === r.doctorId);
           return (
-            <div key={r.id} className="bg-white border border-line p-5">
+            <div key={r.id} className="bg-cardbg border border-line p-5">
               <div className="flex items-center justify-between">
                 <p className="font-display text-lg text-ink">{d?.name}</p>
                 <div className="flex gap-0.5">
