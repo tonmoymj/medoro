@@ -35,6 +35,7 @@ import Reviews from "@/components/Reviews";
 import AdSlot from "@/components/AdSlot";
 import NotFound from "@/components/NotFound";
 import { AdminProvider, useAdmin } from "@/context/AdminContext";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 type View =
   | "home" | "doctors" | "doctor" | "hospitals" | "hospital"
@@ -130,11 +131,14 @@ function AppInner() {
   );
 }
 
-// ── root: wrap with AdminProvider ─────────────────────────────────────────
+// ── root: wrap with LanguageProvider + AdminProvider ───────────────────────
 export default function App() {
   return (
-    <AdminProvider>
-      <AppInner />
-    </AdminProvider>
+    <LanguageProvider>
+      <AdminProvider>
+        <AppInner />
+      </AdminProvider>
+    </LanguageProvider>
   );
 }
+

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Search, Phone, Siren, Droplet, Wind, Calculator, Stethoscope, MessageCircleQuestion, PhoneCall, ClipboardList, Store, HeartHandshake, Activity, Video, PackageSearch, HandHeart, Megaphone, HelpCircle, Briefcase, Star, Sun, Moon, Menu, X } from "lucide-react";
+import { useLang } from "@/context/LanguageContext";
 
 type View =
   | "home" | "doctors" | "doctor" | "hospitals" | "hospital"
@@ -9,7 +10,7 @@ type View =
   | "caregivers" | "physio" | "telemedicine" | "equipment" | "camps" | "notices" | "faq" | "jobs" | "reviews";
 
 export default function Nav({ view, go }: { view: View; go: (v: View) => void }) {
-  const [lang, setLang] = useState<"bn" | "en">("bn");
+  const { lang, setLang, t } = useLang();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     return localStorage.getItem("theme") === "dark" || 
@@ -71,11 +72,11 @@ export default function Nav({ view, go }: { view: View; go: (v: View) => void })
         <div className="mx-auto max-w-6xl px-5 py-1.5 flex items-center justify-between">
           <span className="flex items-center gap-1.5">
             <Phone className="h-3 w-3" strokeWidth={2.5} />
-            জরুরি সহায়তা: ১৬২৬৩
+            {t("জরুরি সহায়তা: ১৬২৬৩")}
           </span>
           <span className="hidden sm:flex items-center gap-1">
-            <button onClick={() => go("cities")} className="hover:text-gold underline underline-offset-2">রাজশাহী সংস্করণ</button>
-            &middot; দেশব্যাপী শীঘ্রই
+            <button onClick={() => go("cities")} className="hover:text-gold underline underline-offset-2">{t("রাজশাহী সংস্করণ")}</button>
+            &middot; {t("দেশব্যাপী শীঘ্রই")}
           </span>
         </div>
       </div>
@@ -95,7 +96,7 @@ export default function Nav({ view, go }: { view: View; go: (v: View) => void })
               Medoro
             </span>
             <span className="hidden md:inline text-[11px] font-mono uppercase tracking-[0.14em] text-ink/50">
-              স্বাস্থ্য নির্দেশিকা
+              {t("স্বাস্থ্য নির্দেশিকা")}
             </span>
           </button>
         </div>
@@ -109,7 +110,7 @@ export default function Nav({ view, go }: { view: View; go: (v: View) => void })
                 activeGroup === l.v ? "border-gold text-ink" : "border-transparent text-ink/60 hover:text-ink"
               }`}
             >
-              {l.label}
+              {t(l.label)}
             </button>
           ))}
         </nav>
@@ -154,7 +155,7 @@ export default function Nav({ view, go }: { view: View; go: (v: View) => void })
             className="flex items-center gap-1.5 sm:gap-2 bg-pine text-paper px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium hover:bg-pine-light transition-colors shadow-sm"
           >
             <Search className="h-4 w-4" strokeWidth={2.5} />
-            <span className="hidden sm:inline">ডাক্তার খুঁজুন</span>
+            <span className="hidden sm:inline">{t("ডাক্তার খুঁজুন")}</span>
           </button>
         </div>
       </div>
@@ -162,7 +163,7 @@ export default function Nav({ view, go }: { view: View; go: (v: View) => void })
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-line bg-paper px-5 py-4 space-y-3 animate-page-in shadow-lg">
-          <div className="font-mono text-xs text-ink/50 uppercase tracking-wider mb-2">মেনু সমুহ</div>
+          <div className="font-mono text-xs text-ink/50 uppercase tracking-wider mb-2">{t("মেনু সমুহ")}</div>
           <div className="grid grid-cols-2 gap-2 font-body text-sm font-medium">
             {links.map((l) => (
               <button
@@ -174,7 +175,7 @@ export default function Nav({ view, go }: { view: View; go: (v: View) => void })
                     : "border-line text-ink hover:bg-pine/5"
                 }`}
               >
-                {l.label}
+                {t(l.label)}
               </button>
             ))}
           </div>
@@ -194,7 +195,7 @@ export default function Nav({ view, go }: { view: View; go: (v: View) => void })
                   view === u.v ? "bg-pine text-paper" : "text-ink/70 hover:bg-pine/10 hover:text-pine"
                 }`}
               >
-                <u.icon className="h-3.5 w-3.5 shrink-0" strokeWidth={2} /> {u.label}
+                <u.icon className="h-3.5 w-3.5 shrink-0" strokeWidth={2} /> {t(u.label)}
               </button>
             ))}
           </div>
@@ -208,7 +209,7 @@ export default function Nav({ view, go }: { view: View; go: (v: View) => void })
                   view === u.v ? "bg-pine text-paper" : "text-ink/70 hover:bg-pine/10 hover:text-pine"
                 }`}
               >
-                <u.icon className="h-3.5 w-3.5 shrink-0" strokeWidth={2} /> {u.label}
+                <u.icon className="h-3.5 w-3.5 shrink-0" strokeWidth={2} /> {t(u.label)}
               </button>
             ))}
           </div>
