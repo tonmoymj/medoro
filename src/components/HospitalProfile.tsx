@@ -20,19 +20,26 @@ export default function HospitalProfile({
         <ArrowLeft className="h-4 w-4" strokeWidth={2} /> হাসপাতাল তালিকায় ফিরুন
       </button>
 
-      <div className="bg-white border border-line p-6 sm:p-8">
-        <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-gold mb-2">{hospital.type}</p>
-        <h1 className="font-display text-3xl sm:text-4xl text-ink">{hospital.name}</h1>
-        <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-ink/55">
-          <span className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" strokeWidth={2} /> {hospital.address}</span>
-          <span className="flex items-center gap-1.5"><Phone className="h-3.5 w-3.5" strokeWidth={2} /> {hospital.phone}</span>
-        </div>
-        <div className="mt-6 flex flex-wrap gap-2">
-          {hospital.facilities.map((f) => (
-            <span key={f} className="text-xs font-mono bg-pine/5 text-pine px-2.5 py-1.5 border border-pine/15 flex items-center gap-1.5">
-              <CheckCircle2 className="h-3.5 w-3.5" strokeWidth={2} /> {f}
-            </span>
-          ))}
+      <div className="bg-white border border-line overflow-hidden">
+        {hospital.photo && (
+          <div className="h-56 sm:h-72 w-full bg-pine/5 border-b border-line overflow-hidden">
+            <img src={hospital.photo} alt={hospital.name} className="h-full w-full object-cover" />
+          </div>
+        )}
+        <div className="p-6 sm:p-8">
+          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-gold mb-2">{hospital.type}</p>
+          <h1 className="font-display text-3xl sm:text-4xl text-ink">{hospital.name}</h1>
+          <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-ink/55">
+            <span className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" strokeWidth={2} /> {hospital.address}</span>
+            <span className="flex items-center gap-1.5"><Phone className="h-3.5 w-3.5" strokeWidth={2} /> {hospital.phone}</span>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {hospital.facilities.map((f) => (
+              <span key={f} className="text-xs font-mono bg-pine/5 text-pine px-2.5 py-1.5 border border-pine/15 flex items-center gap-1.5">
+                <CheckCircle2 className="h-3.5 w-3.5" strokeWidth={2} /> {f}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 

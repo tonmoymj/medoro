@@ -104,7 +104,7 @@ export default function Doctors({ openDoctor }: { openDoctor: (id: string) => vo
           </div>
 
           <div className="mt-8">
-            <AdSlot variant="sidebar" label="ক্লিনিক/ডায়াগনস্টিক সেন্টারের সাইডবার বিজ্ঞাপন" />
+            <AdSlot slotId="doctors-sidebar" variant="sidebar" label="ক্লিনিক/ডায়াগনস্টিক সেন্টারের সাইডবার বিজ্ঞাপন" />
           </div>
         </aside>
 
@@ -117,7 +117,7 @@ export default function Doctors({ openDoctor }: { openDoctor: (id: string) => vo
           </div>
 
           <div className="mb-6">
-            <AdSlot variant="card" label="স্পনসরড হাসপাতাল/ক্লিনিক লিস্টিং — এই ফরম্যাটে ডাক্তার কার্ডের মতোই দেখাবে" />
+            <AdSlot slotId="doctors-card" variant="card" label="স্পনসরড হাসপাতাল/ক্লিনিক লিস্টিং — এই ফরম্যাটে ডাক্তার কার্ডের মতোই দেখাবে" />
           </div>
 
           {loading ? (
@@ -169,9 +169,9 @@ export default function Doctors({ openDoctor }: { openDoctor: (id: string) => vo
                         )}
                       </div>
 
-                      {/* Avatar & Name */}
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className="relative h-16 w-16 shrink-0 border-2 border-pine/20 rounded-full overflow-hidden bg-pine/5 flex items-center justify-center font-display text-2xl text-pine shadow-inner group-hover:border-pine transition-colors">
+                      {/* Avatar & Name - Vertical Centered / Large Layout */}
+                      <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-4 text-center sm:text-left">
+                        <div className="relative h-20 w-20 shrink-0 border-2 border-pine/20 rounded-full overflow-hidden bg-pine/5 flex items-center justify-center font-display text-3xl text-pine shadow-inner group-hover:border-pine transition-colors">
                           {d.photo ? (
                             <img src={d.photo} alt={d.name} className="h-full w-full object-cover" />
                           ) : (
@@ -179,10 +179,10 @@ export default function Doctors({ openDoctor }: { openDoctor: (id: string) => vo
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-display text-lg text-ink group-hover:text-pine transition-colors leading-snug line-clamp-1">
+                          <h3 className="font-display text-lg sm:text-xl text-ink group-hover:text-pine transition-colors leading-snug font-semibold">
                             {d.name}
                           </h3>
-                          <p className="text-xs text-ink/60 mt-1 line-clamp-1 font-mono">
+                          <p className="text-xs text-ink/65 mt-1 leading-normal font-mono">
                             {d.degree}
                           </p>
                         </div>

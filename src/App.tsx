@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Home from "@/components/Home";
@@ -51,10 +51,34 @@ function AppInner() {
   const [activeDoctorId,   setActiveDoctorId]   = useState<string>("1");
   const [activeHospitalId, setActiveHospitalId] = useState<string>("rmch");
 
-  const go = (v: View) => {
+  const go = (v: View, replace = false) => {
     setView(v);
+    if (replace) {
+      window.history.replaceState({ view: v }, "", `#${v}`);
+    } else {
+      window.history.pushState({ view: v }, "", `#${v}`);
+    }
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   };
+
+  useEffect(() => {
+    // Set initial state
+    const initialView = (window.location.hash.replace("#", "") as View) || "home";
+    setView(initialView);
+    window.history.replaceState({ view: initialView }, "", `#${initialView}`);
+
+    const handlePopState = (e: PopStateEvent) => {
+      if (e.state && e.state.view) {
+        setView(e.state.view);
+      } else {
+        const hashView = (window.location.hash.replace("#", "") as View) || "home";
+        setView(hashView);
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   const openDoctor = (id: string) => { setActiveDoctorId(id);   go("doctor"); };
   const openHospital = (id: string) => { setActiveHospitalId(id); go("hospital"); };
@@ -63,7 +87,7 @@ function AppInner() {
     <div className="min-h-screen flex flex-col bg-paper font-body">
       <Nav view={view} go={go} />
       <div className="mx-auto max-w-6xl px-5 pt-4">
-        <AdSlot variant="leaderboard" label="হাসপাতাল/ক্লিনিক/ফার্মা কোম্পানির লিডারবোর্ড বিজ্ঞাপন — সব পেজে দেখা যাবে" />
+        <AdSlot slotId="app-leaderboard" variant="leaderboard" label="হাসপাতাল/ক্লিনিক/ফার্মা কোম্পানির লিডারবোর্ড বিজ্ঞাপন — সব পেজে দেখা যাবে" />
       </div>
       <main key={view} className="flex-1 animate-page-in">
         {view === "home"       && <Home go={go} openDoctor={openDoctor} openHospital={openHospital} />}
@@ -99,7 +123,7 @@ function AppInner() {
         {view === "notfound"   && <NotFound go={go} />}
       </main>
       <div className="mx-auto max-w-6xl px-5 pb-4">
-        <AdSlot variant="strip" label="স্পনসরড স্ট্রিপ বিজ্ঞাপন" />
+        <AdSlot slotId="app-strip" variant="strip" label="স্পনসরড স্ট্রিপ বিজ্ঞাপন" />
       </div>
       <Footer go={go} />
     </div>

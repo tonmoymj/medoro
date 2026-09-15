@@ -40,16 +40,16 @@ export default function DoctorProfile({
         <div className="p-6 sm:p-10">
           <div className="flex flex-col md:flex-row md:items-start gap-8">
             {/* avatar */}
-            <div className="relative mx-auto md:mx-0">
-              <div className="h-32 w-32 border-4 border-white shadow-xl rounded-full overflow-hidden bg-pine/10 flex items-center justify-center font-display text-5xl text-pine ring-1 ring-pine/20">
+            <div className="relative mx-auto md:mx-0 shrink-0">
+              <div className="h-44 w-44 sm:h-48 sm:w-48 border-4 border-white shadow-xl rounded-full overflow-hidden bg-pine/10 flex items-center justify-center font-display text-6xl text-pine ring-2 ring-pine/20">
                 {doctor.photo ? (
-                  <img src={doctor.photo} alt={doctor.name} className="h-full w-full object-cover" />
+                  <img src={doctor.photo} alt={doctor.name} className="h-full w-full object-cover object-top" />
                 ) : (
                   <span>{initials}</span>
                 )}
               </div>
-              <span className="absolute bottom-1 right-1 bg-pine text-paper p-1.5 rounded-full border-2 border-white shadow">
-                <CheckCircle className="h-4 w-4" />
+              <span className="absolute bottom-2 right-2 bg-pine text-paper p-2 rounded-full border-2 border-white shadow-md">
+                <CheckCircle className="h-5 w-5" />
               </span>
             </div>
 
@@ -163,7 +163,7 @@ export default function DoctorProfile({
       </div>
 
       <div className="mt-10">
-        <AdSlot variant="card" label="একই বিশেষত্বের ফার্মা ব্র্যান্ড বা ডায়াগনস্টিক সেন্টারের স্পনসরড বিজ্ঞাপন" />
+        <AdSlot slotId="doctor-profile" variant="card" label="একই বিশেষত্বের ফার্মা ব্র্যান্ড বা ডায়াগনস্টিক সেন্টারের স্পনসরড বিজ্ঞাপন" />
       </div>
 
       {/* ── reviews ── */}

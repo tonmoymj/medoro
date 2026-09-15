@@ -1,7 +1,8 @@
 import { ArrowRight, Clock } from "lucide-react";
-import { articles } from "@/data";
+import { useAdmin } from "@/context/AdminContext";
 
 export default function Blog() {
+  const { articles } = useAdmin();
   return (
     <div className="mx-auto max-w-4xl px-5 py-10">
       <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-gold mb-2">স্বাস্থ্য জার্নাল</p>

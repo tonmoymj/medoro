@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { X, Plus, Trash2 } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { X, Plus, Trash2, Camera, Building2 } from "lucide-react";
 import type { Hospital } from "@/data";
 import { useAdmin } from "@/context/AdminContext";
 
@@ -28,6 +28,8 @@ export default function HospitalForm({ initial, onClose }: Props) {
   const [form, setForm] = useState<Hospital>(() => initial ?? emptyHospital());
   const [facilityInput, setFacilityInput] = useState("");
   const [errors, setErrors] = useState<Partial<Record<keyof Hospital, string>>>({});
+  const [photoError, setPhotoError] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (initial) setForm(initial);
@@ -36,6 +38,56 @@ export default function HospitalForm({ initial, onClose }: Props) {
   const set = (k: keyof Hospital, v: unknown) => {
     setForm(f => ({ ...f, [k]: v }));
     setErrors(e => ({ ...e, [k]: "" }));
+  };
+
+  const handlePhotoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPhotoError("");
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      setPhotoError("ছবির আকার ৫ MB-এর বেশি হওয়া যাবে না।");
+      return;
+    }
+    if (!file.type.startsWith("image/")) {
+      setPhotoError("শুধুমাত্র ছবি ফাইল (JPG, PNG, WEBP) আপলোড করুন।");
+      return;
+    }
+
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+      const filePath = `hospitals/${fileName}`;
+
+      const { data: uploadData, error: uploadErr } = await (await import("@/lib/supabase")).supabase
+        .storage
+        .from("doctor-photos")
+        .upload(filePath, file);
+
+      if (!uploadErr && uploadData) {
+        const { data: urlData } = (await import("@/lib/supabase")).supabase
+          .storage
+          .from("doctor-photos")
+          .getPublicUrl(filePath);
+
+        if (urlData?.publicUrl) {
+          set("photo", urlData.publicUrl);
+          return;
+        }
+      }
+    } catch (err) {
+      console.warn("Storage upload fallback:", err);
+    }
+
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      set("photo", ev.target?.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const removePhoto = () => {
+    set("photo", undefined);
+    if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
   const addFacility = () => {
@@ -62,7 +114,6 @@ export default function HospitalForm({ initial, onClose }: Props) {
   const handleSubmit = (ev: React.FormEvent) => {
     ev.preventDefault();
     if (!validate()) return;
-    // clean up empty facilities
     const clean = { ...form, facilities: form.facilities.filter(f => f.trim() !== "") };
     if (isEdit) updateHospital(clean); else addHospital(clean);
     onClose();
@@ -77,6 +128,47 @@ export default function HospitalForm({ initial, onClose }: Props) {
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          {/* hospital photo upload */}
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-wide text-gold mb-3">হাসপাতালের ছবি</p>
+            <div className="flex items-center gap-5">
+              <div className="h-20 w-28 shrink-0 border border-line overflow-hidden bg-pine/5 flex items-center justify-center rounded">
+                {form.photo ? (
+                  <img src={form.photo} alt="preview" className="h-full w-full object-cover" />
+                ) : (
+                  <Building2 className="h-10 w-10 text-ink/20" strokeWidth={1.5} />
+                )}
+              </div>
+              <div className="flex flex-col gap-2">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handlePhotoChange}
+                />
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="flex items-center gap-2 border border-line px-3 py-2 text-sm text-ink/70 hover:border-pine hover:text-pine transition-colors"
+                >
+                  <Camera className="h-4 w-4" strokeWidth={2} />
+                  {form.photo ? "ছবি পরিবর্তন করুন" : "ছবি আপলোড করুন"}
+                </button>
+                {form.photo && (
+                  <button
+                    type="button"
+                    onClick={removePhoto}
+                    className="flex items-center gap-2 text-xs text-red-400 hover:text-red-600 transition-colors"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" strokeWidth={2} /> ছবি সরান
+                  </button>
+                )}
+                <p className="text-[11px] text-ink/40 font-mono">JPG, PNG, WEBP · সর্বোচ্চ ৫ MB</p>
+                {photoError && <p className="text-xs text-red-500">{photoError}</p>}
+              </div>
+            </div>
+          </div>
           <div className="grid sm:grid-cols-2 gap-4">
             <Field label="হাসপাতালের নাম *" error={errors.name}>
               <input value={form.name} onChange={e => set("name", e.target.value)}

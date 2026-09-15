@@ -34,7 +34,7 @@ export default function Hospitals({ openHospital }: { openHospital: (id: string)
       <h1 className="font-display text-4xl text-ink mb-10">রাজশাহীর চিকিৎসা কেন্দ্র</h1>
 
       <div className="mb-8">
-        <AdSlot variant="card" label="ডায়াগনস্টিক সেন্টার/হাসপাতালের স্পনসরড ফিচার্ড লিস্টিং" />
+        <AdSlot slotId="hospitals-card" variant="card" label="ডায়াগনস্টিক সেন্টার/হাসপাতালের স্পনসরড ফিচার্ড লিস্টিং" />
       </div>
 
       <div className="grid sm:grid-cols-2 gap-6">
@@ -50,17 +50,24 @@ export default function Hospitals({ openHospital }: { openHospital: (id: string)
             <button
               key={h.id}
               onClick={() => openHospital(h.id)}
-              className="text-left bg-white border border-line hover:shadow-[4px_4px_0_0_#123832] transition-all"
+              className="text-left bg-white border border-line hover:shadow-[4px_4px_0_0_#123832] transition-all overflow-hidden flex flex-col justify-between group"
             >
-              <div className="p-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold mb-2">{h.type}</p>
-                <h3 className="font-display text-2xl text-ink">{h.name}</h3>
-                <p className="text-sm text-ink/60 mt-2 flex items-center gap-1.5">
-                  <MapPin className="h-3.5 w-3.5" strokeWidth={2} /> {h.address}
-                </p>
-                <p className="text-sm text-ink/60 mt-1.5 flex items-center gap-1.5">
-                  <Phone className="h-3.5 w-3.5" strokeWidth={2} /> {h.phone}
-                </p>
+              {h.photo && (
+                <div className="h-40 w-full bg-pine/5 overflow-hidden border-b border-line">
+                  <img src={h.photo} alt={h.name} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                </div>
+              )}
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold mb-2">{h.type}</p>
+                  <h3 className="font-display text-2xl text-ink group-hover:text-pine transition-colors">{h.name}</h3>
+                  <p className="text-sm text-ink/60 mt-2 flex items-center gap-1.5">
+                    <MapPin className="h-3.5 w-3.5 shrink-0" strokeWidth={2} /> {h.address}
+                  </p>
+                  <p className="text-sm text-ink/60 mt-1.5 flex items-center gap-1.5">
+                    <Phone className="h-3.5 w-3.5 shrink-0" strokeWidth={2} /> {h.phone}
+                  </p>
+                </div>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {h.facilities.slice(0, 3).map((f) => (
                     <span key={f} className="text-[11px] font-mono bg-pine/5 text-pine px-2 py-1 border border-pine/15">

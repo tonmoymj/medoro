@@ -38,6 +38,7 @@ export type Hospital = {
   beds?: string;
   facilities: string[];
   doctorCount: number;
+  photo?: string; // photo URL or base64
 };
 
 export const specialties: Specialty[] = [
@@ -51,6 +52,16 @@ export const specialties: Specialty[] = [
   { id: "orthopedics", no: "০৮", name: "অর্থোপেডিক্স", nameEn: "Orthopaedics", count: 11 },
   { id: "nak-kan-gola", no: "০৯", name: "নাক-কান-গলা", nameEn: "ENT", count: 8 },
   { id: "manosik", no: "১০", name: "মানসিক রোগ", nameEn: "Psychiatry", count: 6 },
+  { id: "neurology", no: "১১", name: "নিউরোমেডিসিন ও নিউরোলজি", nameEn: "Neurology", count: 15 },
+  { id: "nephrology", no: "১২", name: "কিডনি রোগ (নেফ্রোলজি)", nameEn: "Nephrology", count: 10 },
+  { id: "urology", no: "১৩", name: "ইউরোলজি (মূত্ররোগ)", nameEn: "Urology", count: 8 },
+  { id: "gastroenterology", no: "১৪", name: "লিভার ও পরিপাকতন্ত্র", nameEn: "Gastroenterology", count: 12 },
+  { id: "surgery", no: "১৫", name: "জেনারেল ও ল্যাপারোস্কোপিক সার্জারি", nameEn: "General Surgery", count: 18 },
+  { id: "oncology", no: "১৬", name: "ক্যান্সার রোগ (অনকোলজি)", nameEn: "Oncology", count: 7 },
+  { id: "diabetes", no: "১৭", name: "ডায়াবেটিস ও হরমোন রোগ", nameEn: "Endocrinology", count: 14 },
+  { id: "physiotherapy", no: "১৮", name: "ফিজিক্যাল মেডিসিন ও রিহ্যাভ", nameEn: "Physical Medicine", count: 9 },
+  { id: "buke-rog", no: "১৯", name: "বক্ষব্যাধি ও অ্যাজমা", nameEn: "Pulmonology", count: 11 },
+  { id: "plastic-surgery", no: "২০", name: "প্লাস্টিক ও বার্ন সার্জারি", nameEn: "Plastic Surgery", count: 5 },
 ];
 
 export const hospitals: Hospital[] = [
@@ -198,6 +209,39 @@ export type Article = {
   category: string;
   date: string;
   readTime: string;
+};
+
+export type AboutInfo = {
+  headline: string;
+  description: string;
+  points: { iconName: string; title: string; body: string }[];
+};
+
+export const defaultAboutInfo: AboutInfo = {
+  headline: "একটা সহজ প্রশ্ন থেকে Medoro-র শুরু।",
+  description: '"কোন ডাক্তার কখন বসেন, কোথায় বসেন" — এই সাধারণ প্রশ্নের উত্তর খুঁজতে আমাদের অনেককেই আত্মীয়-স্বজনকে ফোন করতে হয়, ফেসবুক গ্রুপে পোস্ট দিতে হয়। Medoro বানানো হয়েছে এই ঝামেলা দূর করতে — নির্ভরযোগ্য, হালনাগাদ তথ্য এক জায়গায়।',
+  points: [
+    {
+      iconName: "ShieldCheck",
+      title: "যাচাইকৃত তথ্য",
+      body: "প্রতিটি ডাক্তার ও হাসপাতালের তথ্য আমাদের ফিল্ড টিম সরাসরি যোগাযোগ করে যাচাই করে, তারপর তালিকাভুক্ত করে।",
+    },
+    {
+      iconName: "MapPin",
+      title: "রাজশাহী থেকে শুরু",
+      body: "আমরা একটি এলাকায় গভীরভাবে কাজ করে শুরু করছি, যাতে তথ্যের নির্ভরযোগ্যতা বজায় থাকে — তারপর ধাপে ধাপে অন্য বিভাগে ছড়িয়ে যাব।",
+    },
+    {
+      iconName: "Users",
+      title: "সবার জন্য বিনামূল্যে",
+      body: "রোগী হিসেবে ডাক্তার খোঁজা, চেম্বারের তথ্য দেখা — এই প্ল্যাটফর্মে সবসময় সম্পূর্ণ বিনামূল্যে থাকবে।",
+    },
+    {
+      iconName: "BookOpen",
+      title: "স্বাস্থ্য শিক্ষা",
+      body: "ডাক্তারদের পরামর্শ নিয়ে সহজ ভাষায় স্বাস্থ্য বিষয়ক লেখা প্রকাশ করি, যাতে মানুষ প্রাথমিক সিদ্ধান্ত নিজেই নিতে পারে।",
+    },
+  ],
 };
 
 export const articles: Article[] = [

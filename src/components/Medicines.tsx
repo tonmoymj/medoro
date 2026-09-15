@@ -1,13 +1,14 @@
 import { useState, useMemo } from "react";
 import { Search, Pill } from "lucide-react";
-import { generics } from "@/data";
+import { useAdmin } from "@/context/AdminContext";
 import AdSlot from "@/components/AdSlot";
 
 export default function Medicines() {
+  const { medicines } = useAdmin();
   const [query, setQuery] = useState("");
   const filtered = useMemo(
-    () => generics.filter((g) => g.name.includes(query) || g.class.includes(query)),
-    [query]
+    () => medicines.filter((g) => g.name.toLowerCase().includes(query.toLowerCase()) || g.class.toLowerCase().includes(query.toLowerCase())),
+    [query, medicines]
   );
 
   return (
@@ -27,7 +28,7 @@ export default function Medicines() {
       </div>
 
       <div className="mb-8">
-        <AdSlot variant="card" label="ফার্মাসিউটিক্যাল কোম্পানির ব্র্যান্ড স্পনসরশিপ — নির্দিষ্ট জেনেরিক ক্যাটাগরিতে টার্গেটেড" />
+        <AdSlot slotId="medicines-card" variant="card" label="ফার্মাসিউটিক্যাল কোম্পানির ব্র্যান্ড স্পনসরশিপ — নির্দিষ্ট জেনেরিক ক্যাটাগরিতে টার্গেটেড" />
       </div>
 
       <div className="divide-y divide-line border-t border-b border-line">

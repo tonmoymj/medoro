@@ -1,18 +1,26 @@
 import { useState } from "react";
 import { useAdmin } from "@/context/AdminContext";
 import {
-  LayoutDashboard, Users, Building2, LogOut, Menu, X, Stethoscope,
+  LayoutDashboard, Users, Building2, LogOut, Menu, X, Stethoscope, Pill, BookOpen, Info, Megaphone,
 } from "lucide-react";
 import AdminDashboard  from "@/components/admin/AdminDashboard";
 import DoctorManager   from "@/components/admin/DoctorManager";
 import HospitalManager from "@/components/admin/HospitalManager";
+import MedicineManager from "@/components/admin/MedicineManager";
+import ArticleManager  from "@/components/admin/ArticleManager";
+import AboutManager    from "@/components/admin/AboutManager";
+import AdManager       from "@/components/admin/AdManager";
 
-type Tab = "dashboard" | "doctors" | "hospitals";
+type Tab = "dashboard" | "doctors" | "hospitals" | "medicines" | "articles" | "about" | "ads";
 
 const NAV: { id: Tab; label: string; Icon: React.ElementType }[] = [
   { id: "dashboard",  label: "ড্যাশবোর্ড",  Icon: LayoutDashboard },
   { id: "doctors",    label: "ডাক্তার",       Icon: Users },
   { id: "hospitals",  label: "হাসপাতাল",      Icon: Building2 },
+  { id: "medicines",  label: "মেডিসিন",      Icon: Pill },
+  { id: "articles",   label: "স্বাস্থ্যকথা",   Icon: BookOpen },
+  { id: "about",      label: "আমাদের সম্পর্কে", Icon: Info },
+  { id: "ads",        label: "এড ও স্পনসরশিপ", Icon: Megaphone },
 ];
 
 export default function AdminLayout() {
@@ -25,7 +33,7 @@ export default function AdminLayout() {
   return (
     <div className="mx-auto max-w-6xl px-5 py-10">
       <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-gold mb-2">অ্যাডমিন প্যানেল</p>
-      <h1 className="font-display text-4xl text-ink mb-8">ড্যাশবোর্ড</h1>
+      <h1 className="font-display text-4xl text-ink mb-8">ড্যাশবোর্ড & কন্ট্রোল সেন্টার</h1>
 
       <div className="border border-line bg-white overflow-hidden">
         {/* ── topbar ── */}
@@ -57,7 +65,7 @@ export default function AdminLayout() {
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-[200px_1fr]">
+        <div className="grid sm:grid-cols-[220px_1fr]">
           {/* ── sidebar ── */}
           <aside className={`border-r border-line bg-paper/60 p-3 space-y-0.5 ${mobileOpen ? "block" : "hidden"} sm:block`}>
             {NAV.map(({ id, label, Icon }) => (
@@ -78,9 +86,13 @@ export default function AdminLayout() {
 
           {/* ── main content ── */}
           <main className="p-5 sm:p-7 min-h-[500px]">
-            {tab === "dashboard"  && <AdminDashboard  setTab={setTab} />}
+            {tab === "dashboard"  && <AdminDashboard  setTab={(t) => setTab(t as Tab)} />}
             {tab === "doctors"    && <DoctorManager />}
             {tab === "hospitals"  && <HospitalManager />}
+            {tab === "medicines"  && <MedicineManager />}
+            {tab === "articles"   && <ArticleManager />}
+            {tab === "about"      && <AboutManager />}
+            {tab === "ads"        && <AdManager />}
           </main>
         </div>
       </div>

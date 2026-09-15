@@ -41,10 +41,12 @@ export default function DoctorForm({ initial, onClose }: Props) {
   const [photoError, setPhotoError] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // sync specialty label when specialtyId changes
+  // sync specialty label when specialtyId changes (only for preset IDs)
   useEffect(() => {
-    const sp = specialties.find(s => s.id === form.specialtyId);
-    if (sp) setForm(f => ({ ...f, specialty: sp.name + " বিশেষজ্ঞ" }));
+    if (form.specialtyId && form.specialtyId !== "custom") {
+      const sp = specialties.find(s => s.id === form.specialtyId);
+      if (sp) setForm(f => ({ ...f, specialty: sp.name + " বিশেষজ্ঞ" }));
+    }
   }, [form.specialtyId]);
 
   const set = (k: keyof Doctor, v: unknown) => {
@@ -202,12 +204,36 @@ export default function DoctorForm({ initial, onClose }: Props) {
                 className={input(errors.degree)} placeholder="এমবিবিএস, এফসিপিএস..." />
             </Field>
             <Field label="বিভাগ *" error={errors.specialtyId}>
-              <select value={form.specialtyId} onChange={e => set("specialtyId", e.target.value)}
-                className={input(errors.specialtyId)}>
+              <select 
+                value={specialties.some(s => s.id === form.specialtyId) ? form.specialtyId : (form.specialtyId ? "custom" : "")} 
+                onChange={e => {
+                  const val = e.target.value;
+                  if (val === "custom") {
+                    setForm(f => ({ ...f, specialtyId: "custom", specialty: "" }));
+                  } else {
+                    const sp = specialties.find(s => s.id === val);
+                    setForm(f => ({ ...f, specialtyId: val, specialty: sp ? sp.name + " বিশেষজ্ঞ" : "" }));
+                  }
+                  setErrors(err => ({ ...err, specialtyId: "" }));
+                }}
+                className={input(errors.specialtyId)}
+              >
                 <option value="">— বেছে নিন —</option>
                 {specialties.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
+                <option value="custom">✏️ অন্যান্য / কাস্টম বিভাগ যুক্ত করুন...</option>
               </select>
             </Field>
+
+            {(form.specialtyId === "custom" || (!specialties.some(s => s.id === form.specialtyId) && form.specialtyId)) && (
+              <Field label="কাস্টম বিভাগের নাম *" error={errors.specialty}>
+                <input 
+                  value={form.specialty} 
+                  onChange={e => setForm(f => ({ ...f, specialty: e.target.value }))}
+                  className={input(errors.specialty)} 
+                  placeholder="যেমন: নিউরোসার্জারি বিশেষজ্ঞ" 
+                />
+              </Field>
+            )}
             <Field label="অভিজ্ঞতা *" error={errors.experience}>
               <input value={form.experience} onChange={e => set("experience", e.target.value)}
                 className={input(errors.experience)} placeholder="যেমন: ১৫ বছর" />
