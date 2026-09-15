@@ -10,7 +10,8 @@ import About from "@/components/About";
 import Blog from "@/components/Blog";
 import Contact from "@/components/Contact";
 import Cities from "@/components/Cities";
-import AdminPreview from "@/components/AdminPreview";
+import AdminLogin from "@/components/AdminLogin";
+import AdminLayout from "@/components/admin/AdminLayout";
 import JoinUs from "@/components/JoinUs";
 import Ambulance from "@/components/Ambulance";
 import BloodBank from "@/components/BloodBank";
@@ -33,6 +34,7 @@ import Jobs from "@/components/Jobs";
 import Reviews from "@/components/Reviews";
 import AdSlot from "@/components/AdSlot";
 import NotFound from "@/components/NotFound";
+import { AdminProvider, useAdmin } from "@/context/AdminContext";
 
 type View =
   | "home" | "doctors" | "doctor" | "hospitals" | "hospital"
@@ -42,9 +44,11 @@ type View =
   | "caregivers" | "physio" | "telemedicine" | "equipment" | "camps" | "notices" | "faq" | "jobs" | "reviews"
   | "notfound";
 
-export default function App() {
+// ── inner app (has access to AdminContext) ────────────────────────────────
+function AppInner() {
+  const { currentUser } = useAdmin();
   const [view, setView] = useState<View>("home");
-  const [activeDoctorId, setActiveDoctorId] = useState<string>("1");
+  const [activeDoctorId,   setActiveDoctorId]   = useState<string>("1");
   const [activeHospitalId, setActiveHospitalId] = useState<string>("rmch");
 
   const go = (v: View) => {
@@ -52,15 +56,8 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   };
 
-  const openDoctor = (id: string) => {
-    setActiveDoctorId(id);
-    go("doctor");
-  };
-
-  const openHospital = (id: string) => {
-    setActiveHospitalId(id);
-    go("hospital");
-  };
+  const openDoctor = (id: string) => { setActiveDoctorId(id);   go("doctor"); };
+  const openHospital = (id: string) => { setActiveHospitalId(id); go("hospital"); };
 
   return (
     <div className="min-h-screen flex flex-col bg-paper font-body">
@@ -69,46 +66,51 @@ export default function App() {
         <AdSlot variant="leaderboard" label="হাসপাতাল/ক্লিনিক/ফার্মা কোম্পানির লিডারবোর্ড বিজ্ঞাপন — সব পেজে দেখা যাবে" />
       </div>
       <main key={view} className="flex-1 animate-page-in">
-        {view === "home" && <Home go={go} openDoctor={openDoctor} openHospital={openHospital} />}
-        {view === "doctors" && <Doctors openDoctor={openDoctor} />}
-        {view === "doctor" && (
-          <DoctorProfile id={activeDoctorId} back={() => go("doctors")} openHospital={openHospital} />
-        )}
-        {view === "hospitals" && <Hospitals openHospital={openHospital} />}
-        {view === "hospital" && (
-          <HospitalProfile id={activeHospitalId} back={() => go("hospitals")} openDoctor={openDoctor} />
-        )}
-        {view === "about" && <About />}
-        {view === "blog" && <Blog />}
-        {view === "contact" && <Contact />}
-        {view === "cities" && <Cities go={go} />}
-        {view === "admin" && <AdminPreview />}
-        {view === "join" && <JoinUs />}
-        {view === "ambulance" && <Ambulance />}
-        {view === "bloodbank" && <BloodBank />}
-        {view === "oxygen" && <Oxygen />}
-        {view === "hotlines" && <Hotlines />}
-        {view === "bmi" && <BmiCalculator />}
-        {view === "symptom" && <SymptomChecker go={go} />}
-        {view === "medicines" && <Medicines />}
-        {view === "indications" && <Indications />}
+        {view === "home"       && <Home go={go} openDoctor={openDoctor} openHospital={openHospital} />}
+        {view === "doctors"    && <Doctors openDoctor={openDoctor} />}
+        {view === "doctor"     && <DoctorProfile id={activeDoctorId} back={() => go("doctors")} openHospital={openHospital} />}
+        {view === "hospitals"  && <Hospitals openHospital={openHospital} />}
+        {view === "hospital"   && <HospitalProfile id={activeHospitalId} back={() => go("hospitals")} openDoctor={openDoctor} />}
+        {view === "about"      && <About />}
+        {view === "blog"       && <Blog />}
+        {view === "contact"    && <Contact />}
+        {view === "cities"     && <Cities go={go} />}
+        {view === "admin"      && (currentUser ? <AdminLayout /> : <AdminLogin />)}
+        {view === "join"       && <JoinUs />}
+        {view === "ambulance"  && <Ambulance />}
+        {view === "bloodbank"  && <BloodBank />}
+        {view === "oxygen"     && <Oxygen />}
+        {view === "hotlines"   && <Hotlines />}
+        {view === "bmi"        && <BmiCalculator />}
+        {view === "symptom"    && <SymptomChecker go={go} />}
+        {view === "medicines"  && <Medicines />}
+        {view === "indications"&& <Indications />}
         {view === "pharmacies" && <Pharmacies />}
-        {view === "community" && <Community />}
+        {view === "community"  && <Community />}
         {view === "caregivers" && <Caregivers />}
-        {view === "physio" && <Physio />}
-        {view === "telemedicine" && <Telemedicine />}
-        {view === "equipment" && <Equipment />}
-        {view === "camps" && <Camps />}
-        {view === "notices" && <Notices />}
-        {view === "faq" && <Faq />}
-        {view === "jobs" && <Jobs />}
-        {view === "reviews" && <Reviews />}
-        {view === "notfound" && <NotFound go={go} />}
+        {view === "physio"     && <Physio />}
+        {view === "telemedicine"&& <Telemedicine />}
+        {view === "equipment"  && <Equipment />}
+        {view === "camps"      && <Camps />}
+        {view === "notices"    && <Notices />}
+        {view === "faq"        && <Faq />}
+        {view === "jobs"       && <Jobs />}
+        {view === "reviews"    && <Reviews />}
+        {view === "notfound"   && <NotFound go={go} />}
       </main>
       <div className="mx-auto max-w-6xl px-5 pb-4">
         <AdSlot variant="strip" label="স্পনসরড স্ট্রিপ বিজ্ঞাপন" />
       </div>
       <Footer go={go} />
     </div>
+  );
+}
+
+// ── root: wrap with AdminProvider ─────────────────────────────────────────
+export default function App() {
+  return (
+    <AdminProvider>
+      <AppInner />
+    </AdminProvider>
   );
 }

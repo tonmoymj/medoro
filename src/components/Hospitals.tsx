@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { MapPin, Phone, ArrowRight, BedDouble } from "lucide-react";
-import { hospitals } from "@/data";
+import { useAdmin } from "@/context/AdminContext";
 import AdSlot from "@/components/AdSlot";
 import { SkeletonLine } from "@/components/Skeleton";
 
@@ -21,6 +21,7 @@ function HospitalCardSkeleton() {
 }
 
 export default function Hospitals({ openHospital }: { openHospital: (id: string) => void }) {
+  const { hospitals } = useAdmin();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const t = setTimeout(() => setLoading(false), 500);

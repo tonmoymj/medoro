@@ -25,6 +25,7 @@ export type Doctor = {
   area: string;
   chambers: Chamber[];
   featured?: boolean;
+  photo?: string; // base64 data URL
 };
 
 export type Hospital = {

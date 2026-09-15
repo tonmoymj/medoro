@@ -1,5 +1,5 @@
 import { MapPin, Phone, ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
-import { hospitals, doctors } from "@/data";
+import { useAdmin } from "@/context/AdminContext";
 
 export default function HospitalProfile({
   id,
@@ -10,6 +10,7 @@ export default function HospitalProfile({
   back: () => void;
   openDoctor: (id: string) => void;
 }) {
+  const { hospitals, doctors } = useAdmin();
   const hospital = hospitals.find((h) => h.id === id) ?? hospitals[0];
   const hospitalDoctors = doctors.filter((d) => d.chambers.some((c) => c.hospitalId === id));
 
