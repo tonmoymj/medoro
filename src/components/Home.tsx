@@ -116,13 +116,13 @@ export default function Home({
             <button
               key={d.id}
               onClick={() => openDoctor(d.id)}
-              className="text-left bg-cardbg border border-line perf-top pt-5 hover:shadow-gold hover:-translate-y-0.5 transition-all"
+              className="text-left bg-cardbg border border-line perf-top pt-5 hover:shadow-gold hover:-translate-y-0.5 transition-all flex flex-col justify-between h-full"
             >
-              <div className="px-5 pb-5">
+              <div className="px-5 pb-5 flex flex-col flex-1">
                 <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold mb-2">{d.specialty}</p>
                 <h3 className="font-display text-xl text-ink">{d.name}</h3>
-                <p className="text-sm text-ink/60 mt-1">{d.degree}</p>
-                <div className="mt-4 pt-4 border-t border-dashed border-line flex items-center justify-between text-xs font-mono text-ink/50">
+                <p className="text-sm text-ink/60 mt-1 line-clamp-2" title={d.degree}>{d.degree}</p>
+                <div className="mt-auto pt-4 border-t border-dashed border-line flex items-center justify-between text-xs font-mono text-ink/50">
                   <span>{d.experience} {t("অভিজ্ঞতা")}</span>
                   <span className="flex items-center gap-1 text-ink/70">
                     <MapPin className="h-3 w-3" strokeWidth={2} /> {d.area.split(",")[0]}

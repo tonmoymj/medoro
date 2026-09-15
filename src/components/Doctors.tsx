@@ -151,27 +151,27 @@ export default function Doctors({ openDoctor }: { openDoctor: (id: string) => vo
                   <div
                     key={d.id}
                     onClick={() => openDoctor(d.id)}
-                    className="group relative bg-cardbg border border-line hover:border-pine/50 hover:shadow-xl transition-all duration-300 flex flex-col cursor-pointer overflow-hidden"
+                    className="group relative bg-cardbg border border-line hover:border-pine/50 hover:shadow-xl transition-all duration-300 flex flex-col justify-between cursor-pointer overflow-hidden rounded-sm h-full"
                   >
                     {/* Top gradient accent */}
                     <div className="h-1.5 w-full bg-gradient-to-r from-pine via-gold to-pine" />
 
-                    <div className="p-5 flex flex-col flex-1">
+                    <div className="p-4 sm:p-5 flex flex-col flex-1">
                       {/* Badge / Category */}
                       <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className="inline-block font-mono text-[10px] uppercase tracking-wider bg-gold/10 border border-gold/30 text-ink/80 px-2 py-0.5">
+                        <span className="inline-block font-mono text-[10px] uppercase tracking-wider bg-gold/10 border border-gold/30 text-ink/80 px-2 py-0.5 rounded-sm">
                           {d.specialty}
                         </span>
                         {d.featured && (
-                          <span className="font-mono text-[9px] bg-pine text-paper px-1.5 py-0.5 flex items-center gap-1">
+                          <span className="font-mono text-[9px] bg-pine text-paper px-1.5 py-0.5 flex items-center gap-1 rounded-sm">
                             <Star className="h-2.5 w-2.5 fill-paper" /> ফিচার্ড
                           </span>
                         )}
                       </div>
 
-                      {/* Avatar & Name - Vertical Centered / Large Layout */}
-                      <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-4 text-center sm:text-left">
-                        <div className="relative h-28 w-28 sm:h-32 sm:w-32 shrink-0 border-2 border-pine/30 rounded-full overflow-hidden bg-pine/10 flex items-center justify-center font-display text-4xl text-pine shadow-md group-hover:border-pine group-hover:scale-105 transition-all duration-300">
+                      {/* Header: Compact Avatar & Name/Degree */}
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="relative h-16 w-16 shrink-0 border-2 border-pine/30 rounded-full overflow-hidden bg-pine/10 flex items-center justify-center font-display text-2xl text-pine shadow-sm group-hover:border-pine group-hover:scale-105 transition-all duration-300">
                           {d.photo ? (
                             <img src={d.photo} alt={d.name} className="h-full w-full object-cover object-top" />
                           ) : (
@@ -179,33 +179,35 @@ export default function Doctors({ openDoctor }: { openDoctor: (id: string) => vo
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-display text-xl sm:text-2xl text-ink group-hover:text-pine transition-colors leading-snug font-semibold">
+                          <h3 className="font-display text-base sm:text-lg text-ink group-hover:text-pine transition-colors leading-snug font-semibold line-clamp-1">
                             {d.name}
                           </h3>
-                          <p className="text-xs text-ink/65 mt-1 leading-normal font-mono">
+                          <p className="text-xs text-ink/65 mt-1 leading-snug font-mono line-clamp-2" title={d.degree}>
                             {d.degree}
                           </p>
                         </div>
                       </div>
 
                       {/* Info grid */}
-                      <div className="bg-paper/60 border border-line/60 p-3 space-y-1.5 mb-4 text-xs font-mono text-ink/70">
-                        <div className="flex items-center gap-2">
-                          <Clock className="h-3.5 w-3.5 text-gold shrink-0" strokeWidth={2} />
-                          <span>অভিজ্ঞতা: <strong className="text-ink font-normal">{d.experience}</strong></span>
+                      <div className="bg-paper/60 border border-line/60 p-2.5 rounded-sm space-y-1.5 mb-3 text-xs font-mono text-ink/70">
+                        <div className="flex items-center justify-between text-[11px] gap-2">
+                          <span className="flex items-center gap-1">
+                            <Clock className="h-3 w-3 text-gold shrink-0" strokeWidth={2} />
+                            <span>অভিজ্ঞতা: <strong className="text-ink font-normal">{d.experience}</strong></span>
+                          </span>
+                          <span className="flex items-center gap-1 text-ink/60 truncate">
+                            <CheckCircle2 className="h-3 w-3 text-pine shrink-0" strokeWidth={2} />
+                            <span>রেজি: {d.regNo}</span>
+                          </span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <MapPin className="h-3.5 w-3.5 text-gold shrink-0" strokeWidth={2} />
+                        <div className="flex items-center gap-1.5 border-t border-line/40 pt-1.5 text-[11px]">
+                          <MapPin className="h-3 w-3 text-gold shrink-0" strokeWidth={2} />
                           <span className="truncate">{d.area}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <CheckCircle2 className="h-3.5 w-3.5 text-pine shrink-0" strokeWidth={2} />
-                          <span>রেজি: {d.regNo}</span>
                         </div>
                       </div>
 
                       {/* Chambers & Fee info */}
-                      <div className="mt-auto pt-3 border-t border-dashed border-line flex items-center justify-between text-xs font-mono">
+                      <div className="mt-auto pt-2.5 border-t border-dashed border-line flex items-center justify-between text-xs font-mono">
                         <span className="text-ink/60">{d.chambers.length} টি চেম্বার</span>
                         {d.chambers[0] && (
                           <span className="text-pine font-bold">
@@ -215,8 +217,8 @@ export default function Doctors({ openDoctor }: { openDoctor: (id: string) => vo
                       </div>
 
                       {/* Hover Action Button */}
-                      <div className="mt-4">
-                        <span className="block w-full text-center bg-pine/5 group-hover:bg-pine group-hover:text-paper text-pine text-xs font-medium py-2.5 transition-all duration-200 border border-pine/20 group-hover:border-pine">
+                      <div className="mt-3">
+                        <span className="block w-full text-center bg-pine/5 group-hover:bg-pine group-hover:text-paper text-pine text-xs font-medium py-2 transition-all duration-200 border border-pine/20 group-hover:border-pine rounded-sm">
                           বিস্তারিত প্রোফাইল ও সিরিয়াল
                         </span>
                       </div>
