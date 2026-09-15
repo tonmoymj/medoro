@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MapPin, Clock, Wallet, ShieldCheck, Phone, ArrowLeft, Send, Star, Stethoscope, Building2 } from "lucide-react";
+import { MapPin, Clock, Wallet, ShieldCheck, Phone, ArrowLeft, Send, Star, Stethoscope, Building2, Calendar, Award, CheckCircle } from "lucide-react";
 import { hospitals as seedHospitals, reviews } from "@/data";
 import { useAdmin } from "@/context/AdminContext";
 import AdSlot from "@/components/AdSlot";
@@ -25,57 +25,75 @@ export default function DoctorProfile({
 
   return (
     <div className="mx-auto max-w-4xl px-5 py-10">
-      <button onClick={back} className="flex items-center gap-1.5 text-sm text-ink/55 hover:text-pine mb-8 transition-colors">
+      <button 
+        onClick={back} 
+        className="inline-flex items-center gap-2 text-xs font-mono bg-white border border-line px-3.5 py-2 text-ink/70 hover:text-pine hover:border-pine mb-8 transition-all shadow-sm"
+      >
         <ArrowLeft className="h-4 w-4" strokeWidth={2} /> ডাক্তার তালিকায় ফিরুন
       </button>
 
-      {/* ── profile card ── */}
-      <div className="bg-white border border-line overflow-hidden">
-        {/* top accent bar */}
-        <div className="h-1.5 w-full bg-gradient-to-r from-pine/60 to-gold/60" />
+      {/* ── main profile banner card ── */}
+      <div className="bg-white border border-line shadow-md overflow-hidden">
+        {/* top hero accent */}
+        <div className="h-2 w-full bg-gradient-to-r from-pine via-gold to-pine" />
 
-        <div className="p-6 sm:p-8">
-          <div className="flex flex-col sm:flex-row sm:items-start gap-6">
+        <div className="p-6 sm:p-10">
+          <div className="flex flex-col md:flex-row md:items-start gap-8">
             {/* avatar */}
-            <div className="h-24 w-24 shrink-0 border border-pine/20 overflow-hidden bg-pine/10 flex items-center justify-center font-display text-4xl text-pine">
-              {doctor.photo
-                ? <img src={doctor.photo} alt={doctor.name} className="h-full w-full object-cover" />
-                : initials
-              }
+            <div className="relative mx-auto md:mx-0">
+              <div className="h-32 w-32 border-4 border-white shadow-xl rounded-full overflow-hidden bg-pine/10 flex items-center justify-center font-display text-5xl text-pine ring-1 ring-pine/20">
+                {doctor.photo ? (
+                  <img src={doctor.photo} alt={doctor.name} className="h-full w-full object-cover" />
+                ) : (
+                  <span>{initials}</span>
+                )}
+              </div>
+              <span className="absolute bottom-1 right-1 bg-pine text-paper p-1.5 rounded-full border-2 border-white shadow">
+                <CheckCircle className="h-4 w-4" />
+              </span>
             </div>
 
             {/* info */}
-            <div className="flex-1">
-              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-gold mb-1.5">
-                {doctor.specialty}
-              </p>
-              <h1 className="font-display text-3xl sm:text-4xl text-ink">{doctor.name}</h1>
-              <p className="text-ink/60 mt-2 leading-relaxed">{doctor.degree}</p>
-
-              {/* badges row */}
-              <div className="mt-5 flex flex-wrap gap-3">
-                <span className="inline-flex items-center gap-1.5 bg-pine/5 border border-pine/15 font-mono text-xs text-pine px-3 py-1.5">
-                  <ShieldCheck className="h-3.5 w-3.5" strokeWidth={2} />
-                  {doctor.regNo}
+            <div className="flex-1 text-center md:text-left">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-2">
+                <span className="font-mono text-[11px] uppercase tracking-[0.14em] bg-gold/10 border border-gold/30 text-ink px-3 py-0.5">
+                  {doctor.specialty}
                 </span>
-                <span className="inline-flex items-center gap-1.5 bg-gold/5 border border-gold/20 font-mono text-xs text-ink/70 px-3 py-1.5">
-                  <Clock className="h-3.5 w-3.5 text-gold" strokeWidth={2} />
-                  {doctor.experience} অভিজ্ঞতা
-                </span>
-                <span className="inline-flex items-center gap-1.5 bg-line/40 border border-line font-mono text-xs text-ink/70 px-3 py-1.5">
-                  <MapPin className="h-3.5 w-3.5 text-gold" strokeWidth={2} />
-                  {doctor.area}
-                </span>
-                <span className="inline-flex items-center gap-1.5 bg-line/40 border border-line font-mono text-xs text-ink/70 px-3 py-1.5">
-                  <Stethoscope className="h-3.5 w-3.5 text-gold" strokeWidth={2} />
-                  {doctor.chambers.length} টি চেম্বার
-                </span>
-                {avg !== null && (
-                  <span className="inline-flex items-center gap-1.5 bg-gold/5 border border-gold/20 font-mono text-xs text-ink/70 px-3 py-1.5">
-                    <Star className="h-3.5 w-3.5 fill-gold text-gold" strokeWidth={1.5} />
-                    {avg.toFixed(1)} ({doctorReviews.length} রিভিউ)
+                {doctor.featured && (
+                  <span className="font-mono text-[10px] bg-pine text-paper px-2 py-0.5 flex items-center gap-1">
+                    <Star className="h-3 w-3 fill-paper" /> ভেরিফাইড বিশেষজ্ঞ
                   </span>
                 )}
+              </div>
+
+              <h1 className="font-display text-3xl sm:text-4xl text-ink leading-tight">{doctor.name}</h1>
+              <p className="text-pine font-medium mt-1 text-sm sm:text-base leading-relaxed">{doctor.degree}</p>
+
+              {/* quick meta badges */}
+              <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div className="bg-paper border border-line p-2.5 rounded text-left flex items-center gap-2.5">
+                  <Award className="h-4 w-4 text-gold shrink-0" />
+                  <div>
+                    <p className="font-mono text-[9px] uppercase text-ink/40">অভিজ্ঞতা</p>
+                    <p className="font-mono text-xs font-semibold text-ink">{doctor.experience}</p>
+                  </div>
+                </div>
+
+                <div className="bg-paper border border-line p-2.5 rounded text-left flex items-center gap-2.5">
+                  <ShieldCheck className="h-4 w-4 text-pine shrink-0" />
+                  <div>
+                    <p className="font-mono text-[9px] uppercase text-ink/40">রেজিস্ট্রেশন</p>
+                    <p className="font-mono text-xs font-semibold text-ink">{doctor.regNo}</p>
+                  </div>
+                </div>
+
+                <div className="bg-paper border border-line p-2.5 rounded text-left flex items-center gap-2.5 col-span-2 sm:col-span-1">
+                  <MapPin className="h-4 w-4 text-gold shrink-0" />
+                  <div>
+                    <p className="font-mono text-[9px] uppercase text-ink/40">কর্মস্থল/এলাকা</p>
+                    <p className="font-mono text-xs font-semibold text-ink truncate">{doctor.area}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -83,76 +101,89 @@ export default function DoctorProfile({
       </div>
 
       {/* ── chambers ── */}
-      <div className="mt-8">
-        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-gold mb-4 flex items-center gap-2">
-          <Building2 className="h-3.5 w-3.5" strokeWidth={2} />
-          চেম্বারের তথ্য
-        </p>
-        <div className="grid sm:grid-cols-2 gap-4">
+      <div className="mt-10">
+        <div className="flex items-center justify-between mb-4 border-b border-line pb-2">
+          <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-gold font-bold flex items-center gap-2">
+            <Building2 className="h-4 w-4" strokeWidth={2} />
+            চেম্বার ও ভিজিটিং সময়সূচি ({doctor.chambers.length} টি)
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-5">
           {doctor.chambers.map((c, i) => (
-            <div key={i} className="bg-white border border-line overflow-hidden">
-              {/* mini accent */}
-              <div className="h-0.5 w-full bg-gradient-to-r from-pine/40 to-gold/40" />
-              <div className="p-5">
-                <button
-                  onClick={() => openHospital(c.hospitalId)}
-                  className="font-display text-lg text-pine hover:underline text-left leading-snug"
-                >
-                  {c.hospitalName}
-                </button>
-                <p className="text-xs text-ink/50 mt-1.5 flex items-center gap-1.5">
-                  <MapPin className="h-3 w-3 shrink-0" strokeWidth={2} />
-                  {allHospitals.find((h) => h.id === c.hospitalId)?.address}
+            <div key={i} className="bg-white border border-line shadow-sm hover:border-pine/40 transition-all overflow-hidden flex flex-col justify-between">
+              <div className="p-6">
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  <button
+                    onClick={() => openHospital(c.hospitalId)}
+                    className="font-display text-xl text-pine hover:underline text-left leading-snug"
+                  >
+                    {c.hospitalName}
+                  </button>
+                  <span className="font-mono text-xs font-bold text-pine bg-pine/5 border border-pine/20 px-2.5 py-1 whitespace-nowrap">
+                    ফি: {c.fee}
+                  </span>
+                </div>
+
+                <p className="text-xs text-ink/50 flex items-center gap-1.5 mb-5">
+                  <MapPin className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={2} />
+                  {allHospitals.find((h) => h.id === c.hospitalId)?.address || doctor.area}
                 </p>
 
-                <div className="mt-4 grid grid-cols-2 gap-3">
-                  <div className="bg-line/30 px-3 py-2.5">
-                    <p className="font-mono text-[10px] text-ink/40 uppercase tracking-wide mb-1">ভিজিটিং দিন</p>
-                    <p className="font-mono text-xs text-ink">{c.days}</p>
+                <div className="space-y-2 bg-paper/70 p-3.5 border border-line/60 font-mono text-xs text-ink">
+                  <div className="flex items-center justify-between">
+                    <span className="text-ink/50 flex items-center gap-1.5">
+                      <Calendar className="h-3.5 w-3.5 text-gold" /> বার / দিন:
+                    </span>
+                    <span className="font-semibold">{c.days}</span>
                   </div>
-                  <div className="bg-line/30 px-3 py-2.5">
-                    <p className="font-mono text-[10px] text-ink/40 uppercase tracking-wide mb-1">সময়</p>
-                    <p className="font-mono text-xs text-ink">{c.time}</p>
+                  <div className="flex items-center justify-between border-t border-line/40 pt-2">
+                    <span className="text-ink/50 flex items-center gap-1.5">
+                      <Clock className="h-3.5 w-3.5 text-gold" /> সময়সূচি:
+                    </span>
+                    <span className="font-semibold">{c.time}</span>
                   </div>
                 </div>
+              </div>
 
-                <div className="mt-4 flex items-center justify-between gap-3">
-                  <span className="flex items-center gap-1.5 font-mono text-sm text-ink font-medium">
-                    <Wallet className="h-4 w-4 text-gold" strokeWidth={2} />
-                    {c.fee}
-                  </span>
-                  <button className="bg-pine text-paper px-4 py-2 text-xs font-medium hover:bg-pine/90 transition-colors whitespace-nowrap">
-                    অ্যাপয়েন্টমেন্ট চান
-                  </button>
-                </div>
+              <div className="px-6 pb-6 pt-2">
+                <button 
+                  onClick={() => {
+                    const formElem = document.getElementById("serial-form");
+                    formElem?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="w-full text-center bg-pine text-paper text-sm font-medium py-2.5 hover:bg-pine/90 transition-colors shadow-sm"
+                >
+                  অ্যাপয়েন্টমেন্ট বা সিরিয়াল নিন
+                </button>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="mt-8">
+      <div className="mt-10">
         <AdSlot variant="card" label="একই বিশেষত্বের ফার্মা ব্র্যান্ড বা ডায়াগনস্টিক সেন্টারের স্পনসরড বিজ্ঞাপন" />
       </div>
 
       {/* ── reviews ── */}
       {doctorReviews.length > 0 && (
-        <div className="mt-8">
-          <div className="flex items-center justify-between mb-4">
-            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-gold flex items-center gap-2">
-              <Star className="h-3.5 w-3.5 fill-gold" strokeWidth={1.5} />
-              রোগীদের মতামত
+        <div className="mt-10">
+          <div className="flex items-center justify-between mb-4 border-b border-line pb-2">
+            <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-gold font-bold flex items-center gap-2">
+              <Star className="h-4 w-4 fill-gold text-gold" strokeWidth={1.5} />
+              রোগীদের রিভিউ ও অভিজ্ঞতা ({doctorReviews.length})
             </p>
             {avg !== null && (
-              <span className="font-mono text-sm text-ink bg-gold/10 border border-gold/20 px-3 py-1">
-                {avg.toFixed(1)} / ৫
+              <span className="font-mono text-xs font-bold text-ink bg-gold/10 border border-gold/30 px-3 py-1">
+                গড় রেটিং: {avg.toFixed(1)} / ৫
               </span>
             )}
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
             {doctorReviews.map((r) => (
-              <div key={r.id} className="bg-white border border-line p-5">
-                <div className="flex items-center justify-between mb-2">
+              <div key={r.id} className="bg-white border border-line p-5 shadow-sm">
+                <div className="flex items-center justify-between mb-3">
                   <div className="flex gap-0.5">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <Star
@@ -164,7 +195,7 @@ export default function DoctorProfile({
                   </div>
                   <span className="text-xs font-mono text-ink/40">{r.time}</span>
                 </div>
-                <p className="text-sm text-ink/65 leading-relaxed">{r.comment}</p>
+                <p className="text-sm text-ink/75 leading-relaxed">{r.comment}</p>
               </div>
             ))}
           </div>
@@ -172,48 +203,48 @@ export default function DoctorProfile({
       )}
 
       {/* ── call-back form ── */}
-      <div className="mt-8 bg-white border border-line overflow-hidden">
-        <div className="h-1 w-full bg-gradient-to-r from-gold/50 to-pine/50" />
-        <div className="p-6 sm:p-8">
-          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-gold mb-2">যোগাযোগের অনুরোধ</p>
-          <h2 className="font-display text-2xl text-ink mb-6">কল-ব্যাক চান?</h2>
+      <div id="serial-form" className="mt-10 bg-white border border-line shadow-md overflow-hidden">
+        <div className="h-1.5 w-full bg-gradient-to-r from-gold via-pine to-gold" />
+        <div className="p-6 sm:p-10">
+          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-gold mb-1">সিরিয়াল ও সিরিয়ালের সহায়তা</p>
+          <h2 className="font-display text-2xl text-ink mb-6">অ্যাপয়েন্টমেন্ট এর জন্য কল-ব্যাক চান?</h2>
           {sent ? (
-            <p className="text-pine bg-pine/5 border border-pine/20 px-4 py-3 text-sm">
-              ধন্যবাদ! আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।
-            </p>
+            <div className="text-pine bg-pine/5 border border-pine/20 p-5 text-center text-sm font-mono">
+              ✓ ধন্যবাদ! আপনার তথ্য গ্রহণ করা হয়েছে। প্রতিনিধি শীঘ্রই আপনাকে কল করবেন।
+            </div>
           ) : (
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 setSent(true);
               }}
-              className="grid sm:grid-cols-2 gap-4"
+              className="grid sm:grid-cols-2 gap-5"
             >
               <div>
-                <label className="font-mono text-xs text-ink/50 uppercase tracking-wide">আপনার নাম</label>
-                <input required className="w-full mt-1.5 border border-line px-3 py-2.5 text-sm outline-none focus:border-pine" />
+                <label className="font-mono text-xs text-ink/60 uppercase tracking-wide block mb-1">রোগীর নাম *</label>
+                <input required placeholder="নাম লিখুন" className="w-full border border-line px-3.5 py-2.5 text-sm outline-none focus:border-pine bg-paper/30" />
               </div>
               <div>
-                <label className="font-mono text-xs text-ink/50 uppercase tracking-wide">মোবাইল নম্বর</label>
-                <input required className="w-full mt-1.5 border border-line px-3 py-2.5 text-sm outline-none focus:border-pine" />
+                <label className="font-mono text-xs text-ink/60 uppercase tracking-wide block mb-1">মোবাইল নম্বর *</label>
+                <input required placeholder="০১৭XXXXXXXX" className="w-full border border-line px-3.5 py-2.5 text-sm outline-none focus:border-pine bg-paper/30" />
               </div>
               <div className="sm:col-span-2">
-                <label className="font-mono text-xs text-ink/50 uppercase tracking-wide">বার্তা (ঐচ্ছিক)</label>
-                <textarea rows={3} className="w-full mt-1.5 border border-line px-3 py-2.5 text-sm outline-none focus:border-pine resize-none" />
+                <label className="font-mono text-xs text-ink/60 uppercase tracking-wide block mb-1">সমস্যা বা বার্তা (ঐচ্ছিক)</label>
+                <textarea rows={3} placeholder="আপনার শারীরিক সমস্যা সংক্ষেপে লিখুন..." className="w-full border border-line px-3.5 py-2.5 text-sm outline-none focus:border-pine bg-paper/30 resize-none" />
               </div>
               <button
                 type="submit"
-                className="sm:col-span-2 flex items-center justify-center gap-2 bg-gold text-ink px-5 py-3 font-medium hover:bg-gold/90 transition-colors"
+                className="sm:col-span-2 flex items-center justify-center gap-2 bg-pine text-paper px-6 py-3.5 font-medium hover:bg-pine/90 transition-all shadow-md"
               >
-                <Send className="h-4 w-4" strokeWidth={2} /> অনুরোধ পাঠান
+                <Send className="h-4 w-4" strokeWidth={2} /> কল-ব্যাক অনুরোধ নিশ্চিত করুন
               </button>
             </form>
           )}
         </div>
       </div>
 
-      <p className="mt-6 text-xs text-ink/40 flex items-center gap-1.5">
-        <Phone className="h-3.5 w-3.5" strokeWidth={2} /> সরাসরি সিরিয়াল নিতে চেম্বারে ফোন করুন।
+      <p className="mt-6 text-xs text-ink/40 flex items-center justify-center gap-1.5 font-mono">
+        <Phone className="h-3.5 w-3.5 text-gold" strokeWidth={2} /> সরাসরি সিরিয়াল বা তথ্যের জন্য হাসপাতাল বা চেম্বারে সরাসরি কথা বলুন।
       </p>
     </div>
   );
